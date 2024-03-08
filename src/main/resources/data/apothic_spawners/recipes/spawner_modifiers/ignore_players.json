@@ -1,0 +1,10 @@
+{
+	"type": "apothic_spawners:spawner_modifier",
+	"mainhand": {
+		"item": "minecraft:nether_star"
+	},
+	"stat_changes": [{
+		"type": "apothic_spawners:ignore_players",
+		"value": true
+	}]
+}

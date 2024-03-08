@@ -1,0 +1,10 @@
+{
+	"type": "apothic_spawners:spawner_modifier",
+	"mainhand": {
+		"item": "minecraft:soul_lantern"
+	},
+	"stat_changes": [{
+		"type": "apothic_spawners:ignore_light",
+		"value": true
+	}]
+}
