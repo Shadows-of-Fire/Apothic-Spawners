@@ -1,0 +1,28 @@
+{
+	"parent": "apothic_spawners:light",
+	"display": {
+		"icon": {
+			"item": "minecraft:dragon_egg"
+		},
+		"title": {
+			"translate": "advancements.apotheosis.conditions"
+		},
+		"description": {
+			"translate": "advancements.apotheosis.conditions.desc"
+		},
+		"frame": "challenge"
+	},
+	"criteria": {
+		"modifier": {
+			"trigger": "apothic_spawners:spawner_modifier",
+			"conditions": {
+				"ignore_conditions": true
+			}
+		}
+	},
+	"requirements": [
+		[
+			"modifier"
+		]
+	]
+}

@@ -1,0 +1,28 @@
+{
+	"parent": "apothic_spawners:modifier",
+	"display": {
+		"icon": {
+			"item": "minecraft:soul_lantern"
+		},
+		"title": {
+			"translate": "advancements.apotheosis.light"
+		},
+		"description": {
+			"translate": "advancements.apotheosis.light.desc"
+		},
+		"frame": "goal"
+	},
+	"criteria": {
+		"modifier": {
+			"trigger": "apothic_spawners:spawner_modifier",
+			"conditions": {
+				"ignore_light": true
+			}
+		}
+	},
+	"requirements": [
+		[
+			"modifier"
+		]
+	]
+}
