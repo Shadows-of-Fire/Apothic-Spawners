@@ -249,6 +249,10 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                                 living.setHealth(living.getHealth() * getStatValue(SpawnerStats.INITIAL_HEALTH));
                             }
 
+                            if (getStatValue(SpawnerStats.BURNING) && !entity.fireImmune()) {
+                                entity.setRemainingFireTicks(Integer.MAX_VALUE);
+                            }
+
                             int nearby = level.getEntitiesOfClass(entity.getClass(), new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1, pPos.getY() + 1, pPos.getZ() + 1).inflate(this.spawnRange)).size();
                             if (nearby >= this.maxNearbyEntities) {
                                 this.delay(level, pPos);

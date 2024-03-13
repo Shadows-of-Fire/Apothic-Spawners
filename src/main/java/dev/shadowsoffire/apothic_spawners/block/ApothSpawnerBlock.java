@@ -125,7 +125,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
                 SpawnerStats.generateTooltip(tooltipTile.get(), tooltip::add);
             }
             else {
-                tooltip.add(Component.translatable("misc.apotheosis.shift_stats").withStyle(ChatFormatting.GRAY));
+                tooltip.add(Component.translatable("misc.apothic_spawners.shift_stats").withStyle(ChatFormatting.GRAY));
             }
         }
     }

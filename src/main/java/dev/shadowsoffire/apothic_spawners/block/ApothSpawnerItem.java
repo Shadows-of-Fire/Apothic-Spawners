@@ -39,7 +39,7 @@ public class ApothSpawnerItem extends BlockItem {
                         case WATER_AMBIENT, UNDERGROUND_WATER_CREATURE, WATER_CREATURE, AXOLOTLS -> ChatFormatting.BLUE;
                         case MISC -> ChatFormatting.WHITE;
                     };
-                    return Component.translatable("item.apotheosis.spawner", Component.translatable(t.getDescriptionId())).withStyle(color);
+                    return Component.translatable("item.apothic_spawners.spawner", Component.translatable(t.getDescriptionId())).withStyle(color);
                 }
                 catch (Exception ex) {
                     super.getName(stack);

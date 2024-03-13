@@ -59,6 +59,9 @@
 	"stat.apothic_spawners.initial_health": "Initial Health",
 	"stat.apothic_spawners.initial_health.desc": "The initial health percentage of spawned mobs",
 
+	"stat.apothic_spawners.burning": "Burning",
+	"stat.apothic_spawners.burning.desc": "Spawned mobs will be set on fire",
+
     "title.apothic_spawners.spawner": "Spawner Modification",
     "info.apothic_spawners.spawner": "Spawners may be modified with various items, and can be collected with %s.",
     "info.apothic_spawners.spawner.no_silk": "Spawners may be modified with various items, but collection with Silk Touch is currently disabled.",

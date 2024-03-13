@@ -41,6 +41,8 @@ public class SpawnerStats {
 
     public static final SpawnerStat<Boolean> BABY = register("baby", new BooleanStat(false));
 
+    public static final SpawnerStat<Boolean> BURNING = register("burning", new BooleanStat(false));
+
     public static void bootstrap() {}
 
     public static void generateTooltip(ApothSpawnerTile tile, Consumer<Component> list) {
