@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStat;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStat;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,6 +25,7 @@ import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -169,8 +170,8 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
 
         }
 
-        @SuppressWarnings("deprecation")
         @Override
+        @SuppressWarnings("deprecation")
         public void serverTick(ServerLevel level, BlockPos pPos) {
             if (this.isActivated(level, pPos)) {
                 if (this.spawnDelay == -1) {
@@ -243,6 +244,10 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                             }
 
                             if (getStatValue(SpawnerStats.SILENT)) entity.setSilent(true);
+
+                            if (entity instanceof LivingEntity living) {
+                                living.setHealth(living.getHealth() * getStatValue(SpawnerStats.INITIAL_HEALTH));
+                            }
 
                             int nearby = level.getEntitiesOfClass(entity.getClass(), new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1, pPos.getY() + 1, pPos.getZ() + 1).inflate(this.spawnRange)).size();
                             if (nearby >= this.maxNearbyEntities) {

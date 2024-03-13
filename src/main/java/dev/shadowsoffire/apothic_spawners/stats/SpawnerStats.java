@@ -4,7 +4,6 @@ import java.util.function.Consumer;
 
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStat;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -25,6 +24,8 @@ public class SpawnerStats {
     public static final SpawnerStat<Integer> REQ_PLAYER_RANGE = register("req_player_range", new VanillaStat(s -> s.spawner.requiredPlayerRange, (s, v) -> s.spawner.requiredPlayerRange = v));
 
     public static final SpawnerStat<Integer> SPAWN_RANGE = register("spawn_range", new VanillaStat(s -> s.spawner.spawnRange, (s, v) -> s.spawner.spawnRange = v));
+
+    public static final SpawnerStat<Float> INITIAL_HEALTH = register("initial_health", new PercentageStat(1F));
 
     public static final SpawnerStat<Boolean> IGNORE_PLAYERS = register("ignore_players", new BooleanStat(false));
 
