@@ -1,7 +1,7 @@
 {
 	"type": "apothic_spawners:spawner_modifier",
 	"mainhand": {
-		"item": "minecraft:dragon_egg"
+		"item": "minecraft:conduit"
 	},
 	"stat_changes": [{
 		"type": "apothic_spawners:ignore_conditions",

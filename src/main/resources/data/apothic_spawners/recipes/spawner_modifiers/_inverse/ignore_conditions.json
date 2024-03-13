@@ -1,7 +1,7 @@
 {
 	"type": "apothic_spawners:spawner_modifier",
 	"mainhand": {
-		"item": "minecraft:dragon_egg"
+		"item": "minecraft:conduit"
 	},
 	"offhand": {
 		"item": "minecraft:quartz"

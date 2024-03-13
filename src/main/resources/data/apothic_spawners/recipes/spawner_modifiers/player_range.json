@@ -5,8 +5,7 @@
 	},
 	"stat_changes": [{
 		"type": "apothic_spawners:req_player_range",
-		"value": 2,
-		"min": -1,
+		"value": 4,
 		"max": 48
 	}]
 }

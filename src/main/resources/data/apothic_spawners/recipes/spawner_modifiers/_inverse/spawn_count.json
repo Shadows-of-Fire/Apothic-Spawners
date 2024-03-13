@@ -9,8 +9,7 @@
 	"consumes_offhand": false,
 	"stat_changes": [{
 		"type": "apothic_spawners:spawn_count",
-		"value": -1,
-		"min": 1,
-		"max": -1
+		"value": -2,
+		"min": 1
 	}]
 }

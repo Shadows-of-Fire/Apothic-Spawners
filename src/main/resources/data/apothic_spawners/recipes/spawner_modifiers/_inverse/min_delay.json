@@ -10,7 +10,6 @@
 	"stat_changes": [{
 		"type": "apothic_spawners:min_delay",
 		"value": 10,
-		"min": -1,
-		"max": -1
+		"max": 1600
 	}]
 }

@@ -1,7 +1,7 @@
 {
 	"type": "apothic_spawners:spawner_modifier",
 	"mainhand": {
-		"item": "minecraft:blaze_rod"
+		"item": "minecraft:piston"
 	},
 	"offhand": {
 		"item": "minecraft:quartz"
@@ -9,8 +9,7 @@
 	"consumes_offhand": false,
 	"stat_changes": [{
 		"type": "apothic_spawners:spawn_range",
-		"value": -1,
-		"min": 1,
-		"max": -1
+		"value": -2,
+		"min": 1
 	}]
 }

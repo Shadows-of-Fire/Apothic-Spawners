@@ -5,8 +5,7 @@
 	},
 	"stat_changes": [{
 		"type": "apothic_spawners:spawn_count",
-		"value": 1,
-		"min": -1,
+		"value": 2,
 		"max": 16
 	}]
 }
