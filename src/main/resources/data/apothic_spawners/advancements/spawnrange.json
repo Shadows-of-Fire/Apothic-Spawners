@@ -2,13 +2,13 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:blaze_rod"
+			"item": "minecraft:piston"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.spawnrange"
+			"translate": "advancements.apothic_spawners.spawnrange"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.spawnrange.desc"
+			"translate": "advancements.apothic_spawners.spawnrange.desc"
 		},
 		"frame": "goal"
 	},

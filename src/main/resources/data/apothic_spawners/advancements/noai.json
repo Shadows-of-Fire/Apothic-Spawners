@@ -5,10 +5,10 @@
 			"item": "minecraft:chorus_fruit"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.noai"
+			"translate": "advancements.apothic_spawners.noai"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.noai.desc"
+			"translate": "advancements.apothic_spawners.noai.desc"
 		},
 		"frame": "challenge"
 	},

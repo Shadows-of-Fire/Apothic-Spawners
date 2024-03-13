@@ -5,10 +5,10 @@
 			"item": "minecraft:prismarine_crystals"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.playerrange"
+			"translate": "advancements.apothic_spawners.playerrange"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.playerrange.desc"
+			"translate": "advancements.apothic_spawners.playerrange.desc"
 		},
 		"frame": "goal"
 	},

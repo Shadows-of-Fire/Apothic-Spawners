@@ -5,10 +5,10 @@
 			"item": "minecraft:clock"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.maxdelay"
+			"translate": "advancements.apothic_spawners.maxdelay"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.maxdelay.desc"
+			"translate": "advancements.apothic_spawners.maxdelay.desc"
 		},
 		"frame": "goal"
 	},

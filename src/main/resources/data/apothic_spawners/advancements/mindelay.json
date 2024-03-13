@@ -5,10 +5,10 @@
 			"item": "minecraft:sugar"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.mindelay"
+			"translate": "advancements.apothic_spawners.mindelay"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.mindelay.desc"
+			"translate": "advancements.apothic_spawners.mindelay.desc"
 		},
 		"frame": "goal"
 	},

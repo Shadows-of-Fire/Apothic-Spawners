@@ -6,10 +6,10 @@
 			"nbt": "{Enchantments:[{id:\"minecraft:sharpness\",lvl:1s}]}"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.ultimate_spawner"
+			"translate": "advancements.apothic_spawners.ultimate_spawner"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.ultimate_spawner.desc"
+			"translate": "advancements.apothic_spawners.ultimate_spawner.desc"
 		},
 		"frame": "challenge"
 	},

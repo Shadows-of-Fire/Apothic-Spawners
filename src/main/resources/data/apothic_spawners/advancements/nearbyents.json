@@ -5,10 +5,10 @@
 			"item": "minecraft:ghast_tear"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.nearbyents"
+			"translate": "advancements.apothic_spawners.nearbyents"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.nearbyents.desc"
+			"translate": "advancements.apothic_spawners.nearbyents.desc"
 		},
 		"frame": "goal"
 	},

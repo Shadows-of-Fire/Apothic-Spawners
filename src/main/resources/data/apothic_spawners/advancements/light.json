@@ -5,10 +5,10 @@
 			"item": "minecraft:soul_lantern"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.light"
+			"translate": "advancements.apothic_spawners.light"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.light.desc"
+			"translate": "advancements.apothic_spawners.light.desc"
 		},
 		"frame": "goal"
 	},

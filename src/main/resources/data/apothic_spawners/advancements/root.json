@@ -4,10 +4,10 @@
 			"item": "minecraft:spawner"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.spawner"
+			"translate": "advancements.apothic_spawners.spawner"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.spawner.desc"
+			"translate": "advancements.apothic_spawners.spawner.desc"
 		},
 		"frame": "task",
 		"background": "apothic_spawners:textures/advancements/bg/apoth.png"

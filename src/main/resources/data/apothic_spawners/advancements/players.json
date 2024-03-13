@@ -5,10 +5,10 @@
 			"item": "minecraft:nether_star"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.players"
+			"translate": "advancements.apothic_spawners.players"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.players.desc"
+			"translate": "advancements.apothic_spawners.players.desc"
 		},
 		"frame": "challenge"
 	},

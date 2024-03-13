@@ -5,10 +5,10 @@
 			"item": "minecraft:fermented_spider_eye"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.spawncount"
+			"translate": "advancements.apothic_spawners.spawncount"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.spawncount.desc"
+			"translate": "advancements.apothic_spawners.spawncount.desc"
 		},
 		"frame": "goal"
 	},

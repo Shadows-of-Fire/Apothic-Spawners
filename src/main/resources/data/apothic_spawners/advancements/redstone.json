@@ -5,10 +5,10 @@
 			"item": "minecraft:comparator"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.redstone"
+			"translate": "advancements.apothic_spawners.redstone"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.redstone.desc"
+			"translate": "advancements.apothic_spawners.redstone.desc"
 		},
 		"frame": "goal"
 	},

@@ -5,10 +5,10 @@
 			"item": "minecraft:witch_spawn_egg"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.capturing"
+			"translate": "advancements.apothic_spawners.capturing"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.capturing.desc"
+			"translate": "advancements.apothic_spawners.capturing.desc"
 		},
 		"frame": "task"
 	},

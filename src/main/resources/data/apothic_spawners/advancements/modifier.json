@@ -5,10 +5,10 @@
 			"item": "minecraft:sugar"
 		},
 		"title": {
-			"translate": "advancements.apotheosis.modifier"
+			"translate": "advancements.apothic_spawners.modifier"
 		},
 		"description": {
-			"translate": "advancements.apotheosis.modifier.desc"
+			"translate": "advancements.apothic_spawners.modifier.desc"
 		},
 		"frame": "task"
 	},
