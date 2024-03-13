@@ -28,10 +28,10 @@ public class ModifierTrigger extends SimpleCriterionTrigger<ModifierTrigger.Trig
         this.trigger(player, inst -> inst.test(player, tile, modif));
     }
 
-    // TODO: Fix this, it needs to be able to parse all stats and compare them against the values.  Problem is mapping the stats to bounds objects.
+    // TODO: Fix this, it needs to be able to parse all stats and compare them against the values. Problem is mapping the stats to bounds objects.
     public static record TriggerInstance(Optional<ContextAwarePredicate> player, Ints minDelay, Ints maxDelay, Ints spawnCount, Ints nearbyEnts,
         Ints playerRange, Ints spawnRange, Optional<Boolean> ignorePlayers, Optional<Boolean> ignoreConditions, Optional<Boolean> redstone,
-        Optional<Boolean> ignoreLight, Optional<Boolean> noAI, Optional<Boolean> silent, Optional<Boolean> baby) implements SimpleCriterionTrigger.SimpleInstance {
+        Optional<Boolean> ignoreLight, Optional<Boolean> noAI, Optional<Boolean> silent, Optional<Boolean> youthful) implements SimpleCriterionTrigger.SimpleInstance {
 
         public static final Codec<TriggerInstance> CODEC = RecordCodecBuilder.create(inst -> inst
             .group(
@@ -48,7 +48,7 @@ public class ModifierTrigger extends SimpleCriterionTrigger<ModifierTrigger.Trig
                 ExtraCodecs.strictOptionalField(Codec.BOOL, "ignore_light").forGetter(TriggerInstance::ignoreLight),
                 ExtraCodecs.strictOptionalField(Codec.BOOL, "no_ai").forGetter(TriggerInstance::noAI),
                 ExtraCodecs.strictOptionalField(Codec.BOOL, "silent").forGetter(TriggerInstance::silent),
-                ExtraCodecs.strictOptionalField(Codec.BOOL, "baby").forGetter(TriggerInstance::baby))
+                ExtraCodecs.strictOptionalField(Codec.BOOL, "youthful").forGetter(TriggerInstance::youthful))
             .apply(inst, TriggerInstance::new));
 
         public boolean test(ServerPlayer player, ApothSpawnerTile tile, SpawnerModifier modif) {
@@ -65,7 +65,7 @@ public class ModifierTrigger extends SimpleCriterionTrigger<ModifierTrigger.Trig
             if (check(tile, SpawnerStats.IGNORE_LIGHT, this.ignoreLight)) return false;
             if (check(tile, SpawnerStats.NO_AI, this.noAI)) return false;
             if (check(tile, SpawnerStats.SILENT, this.silent)) return false;
-            if (check(tile, SpawnerStats.BABY, this.baby)) return false;
+            if (check(tile, SpawnerStats.YOUTHFUL, this.youthful)) return false;
             return true;
         }
 

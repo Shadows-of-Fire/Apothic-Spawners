@@ -39,7 +39,7 @@ public class SpawnerStats {
 
     public static final SpawnerStat<Boolean> SILENT = register("silent", new BooleanStat(false));
 
-    public static final SpawnerStat<Boolean> BABY = register("baby", new BooleanStat(false));
+    public static final SpawnerStat<Boolean> YOUTHFUL = register("youthful", new BooleanStat(false));
 
     public static final SpawnerStat<Boolean> BURNING = register("burning", new BooleanStat(false));
 

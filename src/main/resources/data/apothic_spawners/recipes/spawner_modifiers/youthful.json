@@ -4,7 +4,7 @@
 		"item": "minecraft:turtle_egg"
 	},
 	"stat_changes": [{
-		"type": "apothic_spawners:baby",
+		"type": "apothic_spawners:youthful",
 		"value": true
 	}]
 }

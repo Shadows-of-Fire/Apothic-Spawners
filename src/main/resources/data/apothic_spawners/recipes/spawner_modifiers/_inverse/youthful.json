@@ -8,7 +8,7 @@
 	},
 	"consumes_offhand": false,
 	"stat_changes": [{
-		"type": "apothic_spawners:baby",
+		"type": "apothic_spawners:youthful",
 		"value": false
 	}]
 }

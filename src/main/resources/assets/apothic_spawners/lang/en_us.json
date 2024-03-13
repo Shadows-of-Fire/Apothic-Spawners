@@ -53,8 +53,8 @@
 	"stat.apothic_spawners.silent": "Silent",
 	"stat.apothic_spawners.silent.desc": "Spawned entities will make no noise",
     
-	"stat.apothic_spawners.baby": "Youthful",
-	"stat.apothic_spawners.baby.desc": "The spawner will always spawn a baby entity when possible",
+	"stat.apothic_spawners.youthful": "Youthful",
+	"stat.apothic_spawners.youthful.desc": "The spawner will always spawn a baby entity when possible",
 
 	"stat.apothic_spawners.initial_health": "Initial Health",
 	"stat.apothic_spawners.initial_health.desc": "The initial health percentage of spawned mobs",

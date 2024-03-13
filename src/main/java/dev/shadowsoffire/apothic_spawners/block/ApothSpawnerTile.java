@@ -239,7 +239,7 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                                 });
                             }
 
-                            if (getStatValue(SpawnerStats.BABY) && entity instanceof Mob mob) {
+                            if (getStatValue(SpawnerStats.YOUTHFUL) && entity instanceof Mob mob) {
                                 mob.setBaby(true);
                             }
 
