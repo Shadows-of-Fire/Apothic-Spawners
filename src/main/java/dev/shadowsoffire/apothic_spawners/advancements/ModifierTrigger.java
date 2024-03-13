@@ -8,7 +8,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile.SpawnerLogicExt;
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStat;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStat;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;

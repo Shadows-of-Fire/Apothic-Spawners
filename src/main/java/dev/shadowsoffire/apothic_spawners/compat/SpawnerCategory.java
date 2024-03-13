@@ -44,7 +44,7 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
     public SpawnerCategory(IGuiHelper helper) {
         this.bg = helper.drawableBuilder(TEXTURES, 0, 0, 169, 75).build();
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Items.SPAWNER));
-        this.title = Component.translatable("title.apotheosis.spawner");
+        this.title = Component.translatable("title.apothic_spawners.spawner");
     }
 
     @Override
@@ -87,14 +87,15 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
         if (scn == null) return; // We need this to render tooltips, bail if its not there.
         if (mouseX >= -1 && mouseX < 9 && mouseY >= 13 && mouseY < 13 + 12) {
             gfx.blit(TEXTURES, -1, 13, 0, 0, 75, 10, 12, 256, 256);
-            gfx.renderComponentTooltip(font, Arrays.asList(Component.translatable("misc.apotheosis.mainhand")), (int) mouseX, (int) mouseY);
+            gfx.renderComponentTooltip(font, Arrays.asList(Component.translatable("misc.apothic_spawners.mainhand")), (int) mouseX, (int) mouseY);
         }
         else if (mouseX >= -1 && mouseX < 9 && mouseY >= 50 && mouseY < 50 + 12 && recipe.getOffhandInput() != Ingredient.EMPTY) {
             gfx.blit(TEXTURES, -1, 50, 0, 0, 75, 10, 12, 256, 256);
-            gfx.renderComponentTooltip(font, Arrays.asList(Component.translatable("misc.apotheosis.offhand"), Component.translatable("misc.apotheosis.not_consumed").withStyle(ChatFormatting.GRAY)), (int) mouseX, (int) mouseY);
+            gfx.renderComponentTooltip(font, Arrays.asList(Component.translatable("misc.apothic_spawners.offhand"), Component.translatable("misc.apothic_spawners.not_consumed").withStyle(ChatFormatting.GRAY)), (int) mouseX,
+                (int) mouseY);
         }
         else if (mouseX >= 33 && mouseX < 33 + 16 && mouseY >= 30 && mouseY < 30 + 16) {
-            gfx.renderComponentTooltip(font, Arrays.asList(Component.translatable("misc.apotheosis.rclick_spawner")), (int) mouseX, (int) mouseY);
+            gfx.renderComponentTooltip(font, Arrays.asList(Component.translatable("misc.apothic_spawners.rclick_spawner")), (int) mouseX, (int) mouseY);
         }
 
         PoseStack mvStack = gfx.pose();
@@ -106,11 +107,11 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
         int top = 75 / 2 - recipe.getStatModifiers().size() * (font.lineHeight + 2) / 2 + 2;
         int left = 168;
         for (StatModifier<?> s : recipe.getStatModifiers()) {
-            String value = s.value().toString();
+            String value = s.getFormattedValue();
             if ("true".equals(value)) value = "+";
             else if ("false".equals(value)) value = "-";
             else if (s.value() instanceof Number num && num.intValue() > 0) value = "+" + value;
-            Component msg = Component.translatable("misc.apotheosis.concat", value, s.stat().name());
+            Component msg = Component.translatable("misc.apothic_spawners.concat", value, s.stat().name());
             int width = font.width(msg);
             boolean hover = mouseX >= left - width && mouseX < left && mouseY >= top && mouseY < top + font.lineHeight + 1;
             gfx.drawString(font, msg, left - font.width(msg), top, hover ? 0x8080FF : 0x333333, false);
@@ -123,9 +124,10 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
                 list.add(s.stat().name().withStyle(ChatFormatting.GREEN, ChatFormatting.UNDERLINE));
                 list.add(s.stat().desc().withStyle(ChatFormatting.GRAY));
                 if (s.value() instanceof Number) {
+                    StatModifier<Number> n = (StatModifier<Number>) s;
                     if (s.min().isPresent() || s.max().isPresent()) list.add(Component.literal(" "));
-                    if (s.min().isPresent()) list.add(Component.translatable("misc.apotheosis.min_value", s.min().get()).withStyle(ChatFormatting.GRAY));
-                    if (s.max().isPresent()) list.add(Component.translatable("misc.apotheosis.max_value", s.max().get()).withStyle(ChatFormatting.GRAY));
+                    if (s.min().isPresent()) list.add(Component.translatable("misc.apothic_spawners.min_value", n.stat().formatValue(n.min().get())).withStyle(ChatFormatting.GRAY));
+                    if (s.max().isPresent()) list.add(Component.translatable("misc.apothic_spawners.max_value", n.stat().formatValue(n.max().get())).withStyle(ChatFormatting.GRAY));
                 }
                 renderComponentTooltip(scn, gfx, list, left + 6, (int) mouseY, maxWidth, font);
             }

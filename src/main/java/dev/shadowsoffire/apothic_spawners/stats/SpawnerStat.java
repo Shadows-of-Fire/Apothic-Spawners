@@ -1,11 +1,11 @@
-package dev.shadowsoffire.apothic_spawners.modifiers;
+package dev.shadowsoffire.apothic_spawners.stats;
 
 import java.util.Optional;
 
 import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
-import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -57,5 +57,16 @@ public interface SpawnerStat<T> {
 
     default MutableComponent desc() {
         return Component.translatable(this.getId().toLanguageKey("stat", "desc"));
+    }
+
+    default String formatValue(T value) {
+        return value.toString();
+    }
+
+    /**
+     * Formats a Stat's name with its value, in the format 'Name: value'.
+     */
+    static Component createTooltip(SpawnerStat<?> stat, String value) {
+        return Component.translatable("misc.apothic_spawners.value_concat", stat.name(), Component.literal(value).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.GREEN);
     }
 }

@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStat;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -33,6 +34,10 @@ public record StatModifier<T>(SpawnerStat<T> stat, T value, Optional<T> min, Opt
     public void write(FriendlyByteBuf buf) {
         buf.writeResourceLocation(this.stat.getId());
         buf.writeNbt((CompoundTag) modifierCodec(stat).encodeStart(NbtOps.INSTANCE, this).getOrThrow(false, ApothicSpawners.LOGGER::error));
+    }
+
+    public String getFormattedValue() {
+        return stat.formatValue(value);
     }
 
     public static StatModifier<?> read(FriendlyByteBuf buf) {

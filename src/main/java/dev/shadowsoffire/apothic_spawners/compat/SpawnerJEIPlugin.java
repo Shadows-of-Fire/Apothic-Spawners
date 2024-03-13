@@ -39,16 +39,16 @@ public class SpawnerJEIPlugin implements IModPlugin {
 
         reg.addRecipes(SpawnerCategory.TYPE, recipes);
         if (ASConfig.spawnerSilkLevel == -1) {
-            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, Component.translatable("info.apotheosis.spawner.no_silk"));
+            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, Component.translatable("info.apothic_spawners.spawner.no_silk"));
         }
         else if (ASConfig.spawnerSilkLevel == 0) {
-            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, Component.translatable("info.apotheosis.spawner.always_drop"));
+            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, Component.translatable("info.apothic_spawners.spawner.always_drop"));
         }
         else reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK,
-            Component.translatable("info.apotheosis.spawner", ((MutableComponent) Enchantments.SILK_TOUCH.getFullname(ASConfig.spawnerSilkLevel)).withStyle(ChatFormatting.DARK_BLUE).getString()));
+            Component.translatable("info.apothic_spawners.spawner", ((MutableComponent) Enchantments.SILK_TOUCH.getFullname(ASConfig.spawnerSilkLevel)).withStyle(ChatFormatting.DARK_BLUE).getString()));
         for (Item i : BuiltInRegistries.ITEM) {
             if (i instanceof SpawnEggItem) {
-                reg.addIngredientInfo(new ItemStack(i), VanillaTypes.ITEM_STACK, Component.translatable("info.apotheosis.capturing", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(ASConfig.capturingDropChance * 100)));
+                reg.addIngredientInfo(new ItemStack(i), VanillaTypes.ITEM_STACK, Component.translatable("info.apothic_spawners.capturing", ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(ASConfig.capturingDropChance * 100)));
             }
         }
     }

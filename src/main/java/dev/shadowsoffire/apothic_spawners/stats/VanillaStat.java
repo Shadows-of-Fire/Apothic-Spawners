@@ -6,9 +6,7 @@ import java.util.function.Function;
 
 import com.mojang.serialization.Codec;
 
-import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerBlock;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStat;
 import net.minecraft.network.chat.Component;
 
 /**
@@ -43,7 +41,7 @@ class VanillaStat implements SpawnerStat<Integer> {
 
     @Override
     public Component getTooltip(ApothSpawnerTile spawner) {
-        return ApothSpawnerBlock.concat(this.name(), this.getValue(spawner));
+        return SpawnerStat.createTooltip(this, this.getValue(spawner).toString());
     }
 
     @Override

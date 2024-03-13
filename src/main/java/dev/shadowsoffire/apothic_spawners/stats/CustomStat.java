@@ -1,7 +1,8 @@
 package dev.shadowsoffire.apothic_spawners.stats;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStat;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
 
 public abstract class CustomStat<T> implements SpawnerStat<T> {
 
@@ -21,5 +22,12 @@ public abstract class CustomStat<T> implements SpawnerStat<T> {
     public void setValue(ApothSpawnerTile spawner, T value) {
         spawner.getStatsMap().put(this, value);
     }
+
+    @Override
+    public final Component getTooltip(ApothSpawnerTile spawner) {
+        return this.getValue(spawner) == this.defaultValue ? CommonComponents.EMPTY : getTooltipImpl(spawner);
+    }
+
+    public abstract Component getTooltipImpl(ApothSpawnerTile spawner);
 
 }

@@ -41,7 +41,7 @@ public class SpawnerHwylaPlugin implements IWailaPlugin, IBlockComponentProvider
             tooltipTile.load(accessor.getServerData());
             SpawnerStats.generateTooltip(tooltipTile, tooltip::add);
         }
-        else tooltip.add(Component.translatable("misc.apotheosis.ctrl_stats"));
+        else tooltip.add(Component.translatable("misc.apothic_spawners.ctrl_stats"));
     }
 
     @Override

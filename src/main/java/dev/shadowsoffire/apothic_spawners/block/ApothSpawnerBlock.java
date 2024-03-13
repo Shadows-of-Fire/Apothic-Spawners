@@ -130,10 +130,6 @@ public class ApothSpawnerBlock extends SpawnerBlock {
         }
     }
 
-    public static Component concat(Object... args) {
-        return Component.translatable("misc.apotheosis.value_concat", args[0], Component.literal(args[1].toString()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.GREEN);
-    }
-
     @Override
     public Item asItem() {
         return Items.SPAWNER;

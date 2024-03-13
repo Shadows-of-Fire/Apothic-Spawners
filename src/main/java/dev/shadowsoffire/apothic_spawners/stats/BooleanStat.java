@@ -6,7 +6,6 @@ import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 
 public class BooleanStat extends CustomStat<Boolean> {
@@ -21,15 +20,15 @@ public class BooleanStat extends CustomStat<Boolean> {
     }
 
     @Override
-    public Component getTooltip(ApothSpawnerTile spawner) {
-        return this.getValue(spawner) ? this.name().withStyle(ChatFormatting.DARK_GREEN) : CommonComponents.EMPTY;
+    public Component getTooltipImpl(ApothSpawnerTile spawner) {
+        return this.name().withStyle(ChatFormatting.DARK_GREEN);
     }
 
     @Override
     public boolean applyModifier(ApothSpawnerTile spawner, Boolean value, Optional<Boolean> min, Optional<Boolean> max) {
         boolean old = this.getValue(spawner);
         this.setValue(spawner, value);
-        return old == this.getValue(spawner);
+        return old != this.getValue(spawner);
     }
 
 }
