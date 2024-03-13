@@ -62,6 +62,9 @@
 	"stat.apothic_spawners.burning": "Burning",
 	"stat.apothic_spawners.burning.desc": "Spawned mobs will be set on fire",
 
+	"stat.apothic_spawners.echoing": "Echoing",
+	"stat.apothic_spawners.echoing.desc": "Spawned mobs will drop extra loot, increasing with level",
+
     "title.apothic_spawners.spawner": "Spawner Modification",
     "info.apothic_spawners.spawner": "Spawners may be modified with various items, and can be collected with %s.",
     "info.apothic_spawners.spawner.no_silk": "Spawners may be modified with various items, but collection with Silk Touch is currently disabled.",
@@ -101,5 +104,7 @@
     "advancements.apothic_spawners.noai": "Brain Drain",
     "advancements.apothic_spawners.noai.desc": "Disable Mob AI for a spawner.",
     "advancements.apothic_spawners.ultimate_spawner": "The Ultimate Spawner",
-    "advancements.apothic_spawners.ultimate_spawner.desc": "Create a spawner with minimal delays that has redstone control, no AI, ignores spawn conditions, and ignores players."
+    "advancements.apothic_spawners.ultimate_spawner.desc": "Create a spawner with minimal delays that has redstone control, no AI, ignores spawn conditions, and ignores players.",
+
+    "enchantment.level.0": "0"
 }

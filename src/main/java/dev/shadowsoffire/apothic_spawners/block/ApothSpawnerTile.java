@@ -231,33 +231,37 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                                 return;
                             }
 
-                            // Raise the NoAI Flag and set the apotheosis:movable flag for the main mob and all mob passengers.
-                            if (getStatValue(SpawnerStats.NO_AI)) {
-                                entity.getSelfAndPassengers().filter(Mob.class::isInstance).map(Mob.class::cast).forEach(mob -> {
-                                    mob.setNoAi(true);
-                                    mob.getPersistentData().putBoolean("apotheosis:movable", true);
-                                });
-                            }
-
-                            if (getStatValue(SpawnerStats.YOUTHFUL) && entity instanceof Mob mob) {
-                                mob.setBaby(true);
-                            }
-
-                            if (getStatValue(SpawnerStats.SILENT)) entity.setSilent(true);
-
-                            if (entity instanceof LivingEntity living) {
-                                living.setHealth(living.getHealth() * getStatValue(SpawnerStats.INITIAL_HEALTH));
-                            }
-
-                            if (getStatValue(SpawnerStats.BURNING) && !entity.fireImmune()) {
-                                entity.setRemainingFireTicks(Integer.MAX_VALUE);
-                            }
-
                             int nearby = level.getEntitiesOfClass(entity.getClass(), new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1, pPos.getY() + 1, pPos.getZ() + 1).inflate(this.spawnRange)).size();
                             if (nearby >= this.maxNearbyEntities) {
                                 this.delay(level, pPos);
                                 return;
                             }
+
+                            entity.getSelfAndPassengers().forEach(selfOrPassenger -> {
+                                // Raise the NoAI Flag and set the apotheosis:movable flag for the main mob and all mob passengers.
+                                if (getStatValue(SpawnerStats.NO_AI) && selfOrPassenger instanceof Mob mob) {
+                                    mob.setNoAi(true);
+                                    mob.getPersistentData().putBoolean("apotheosis:movable", true);
+                                }
+
+                                if (getStatValue(SpawnerStats.YOUTHFUL) && selfOrPassenger instanceof Mob mob) {
+                                    mob.setBaby(true);
+                                }
+
+                                if (getStatValue(SpawnerStats.SILENT)) selfOrPassenger.setSilent(true);
+
+                                if (getStatValue(SpawnerStats.INITIAL_HEALTH) != 1 && selfOrPassenger instanceof LivingEntity living) {
+                                    living.setHealth(living.getHealth() * getStatValue(SpawnerStats.INITIAL_HEALTH));
+                                }
+
+                                if (getStatValue(SpawnerStats.BURNING) && !selfOrPassenger.fireImmune()) {
+                                    selfOrPassenger.setRemainingFireTicks(Integer.MAX_VALUE);
+                                }
+
+                                if (getStatValue(SpawnerStats.ECHOING) > 0) {
+                                    selfOrPassenger.getPersistentData().putInt(SpawnerStats.ECHOING.getId().toString(), getStatValue(SpawnerStats.ECHOING));
+                                }
+                            });
 
                             entity.moveTo(entity.getX(), entity.getY(), entity.getZ(), rand.nextFloat() * 360.0F, 0.0F);
                             if (entity instanceof Mob mob) {

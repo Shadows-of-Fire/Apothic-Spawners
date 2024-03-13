@@ -43,6 +43,8 @@ public class SpawnerStats {
 
     public static final SpawnerStat<Boolean> BURNING = register("burning", new BooleanStat(false));
 
+    public static final SpawnerStat<Integer> ECHOING = register("echoing", new LevelStat(0));
+
     public static void bootstrap() {}
 
     public static void generateTooltip(ApothSpawnerTile tile, Consumer<Component> list) {

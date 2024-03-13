@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
  */
 class VanillaStat implements SpawnerStat<Integer> {
 
-    private static final Codec<Integer> SHORT_INT = Codec.intRange(-1, Short.MAX_VALUE);
+    private static final Codec<Integer> SHORT_INT = Codec.intRange(Short.MIN_VALUE, Short.MAX_VALUE);
 
     protected final Function<ApothSpawnerTile, Integer> getter;
     protected final BiConsumer<ApothSpawnerTile, Integer> setter;

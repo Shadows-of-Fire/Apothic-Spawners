@@ -66,7 +66,11 @@ public interface SpawnerStat<T> {
     /**
      * Formats a Stat's name with its value, in the format 'Name: value'.
      */
+    static Component createTooltip(SpawnerStat<?> stat, MutableComponent value) {
+        return Component.translatable("misc.apothic_spawners.value_concat", stat.name(), value.withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.GREEN);
+    }
+
     static Component createTooltip(SpawnerStat<?> stat, String value) {
-        return Component.translatable("misc.apothic_spawners.value_concat", stat.name(), Component.literal(value).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.GREEN);
+        return createTooltip(stat, Component.literal(value));
     }
 }

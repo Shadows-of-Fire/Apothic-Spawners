@@ -16,7 +16,7 @@ public class PercentageStat extends CustomStat<Float> {
 
     @Override
     public Codec<Float> getValueCodec() {
-        return Codec.floatRange(0, 1);
+        return Codec.floatRange(-1, 1);
     }
 
     @Override
