@@ -59,13 +59,13 @@ public class ModifierTrigger extends SimpleCriterionTrigger<ModifierTrigger.Trig
             if (!this.nearbyEnts.matches(logic.maxNearbyEntities)) return false;
             if (!this.playerRange.matches(logic.requiredPlayerRange)) return false;
             if (!this.spawnRange.matches(logic.spawnRange)) return false;
-            if (this.check(tile, SpawnerStats.IGNORE_PLAYERS, this.ignorePlayers)) return false;
-            if (this.check(tile, SpawnerStats.IGNORE_CONDITIONS, this.ignoreConditions)) return false;
-            if (this.check(tile, SpawnerStats.REDSTONE_CONTROL, this.redstone)) return false;
-            if (this.check(tile, SpawnerStats.IGNORE_LIGHT, this.ignoreLight)) return false;
-            if (this.check(tile, SpawnerStats.NO_AI, this.noAI)) return false;
-            if (this.check(tile, SpawnerStats.SILENT, this.silent)) return false;
-            if (this.check(tile, SpawnerStats.YOUTHFUL, this.youthful)) return false;
+            if (!this.check(tile, SpawnerStats.IGNORE_PLAYERS, this.ignorePlayers)) return false;
+            if (!this.check(tile, SpawnerStats.IGNORE_CONDITIONS, this.ignoreConditions)) return false;
+            if (!this.check(tile, SpawnerStats.REDSTONE_CONTROL, this.redstone)) return false;
+            if (!this.check(tile, SpawnerStats.IGNORE_LIGHT, this.ignoreLight)) return false;
+            if (!this.check(tile, SpawnerStats.NO_AI, this.noAI)) return false;
+            if (!this.check(tile, SpawnerStats.SILENT, this.silent)) return false;
+            if (!this.check(tile, SpawnerStats.YOUTHFUL, this.youthful)) return false;
             return true;
         }
 
