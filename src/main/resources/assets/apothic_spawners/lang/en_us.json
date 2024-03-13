@@ -6,8 +6,8 @@
 
     "misc.apothic_spawners.concat": "%s %s",
     "misc.apothic_spawners.value_concat": "%s: %s",
-    "misc.apothic_spawners.min_value": "This modifier cannot reduce this below %s",
-    "misc.apothic_spawners.max_value": "This modifier cannot increase this above %s",
+    "misc.apothic_spawners.min_value": "Min Value: %s",
+    "misc.apothic_spawners.max_value": "Max Value: %s",
     "misc.apothic_spawners.mainhand": "Held in Main Hand",
     "misc.apothic_spawners.offhand": "Held in Off Hand",
     "misc.apothic_spawners.not_consumed": "This item is not consumed",
