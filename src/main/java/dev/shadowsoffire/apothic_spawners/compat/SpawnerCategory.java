@@ -76,6 +76,7 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void draw(SpawnerModifier recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics gfx, double mouseX, double mouseY) {
         if (recipe.getOffhandInput() == Ingredient.EMPTY) {
             gfx.blit(TEXTURES, 1, 31, 0, 0, 88, 28, 34, 256, 256);
@@ -122,9 +123,9 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
                 list.add(s.stat().name().withStyle(ChatFormatting.GREEN, ChatFormatting.UNDERLINE));
                 list.add(s.stat().desc().withStyle(ChatFormatting.GRAY));
                 if (s.value() instanceof Number) {
-                    if (((Number) s.min()).intValue() > 0 || ((Number) s.max()).intValue() != Integer.MAX_VALUE) list.add(Component.literal(" "));
-                    if (((Number) s.min()).intValue() > 0) list.add(Component.translatable("misc.apotheosis.min_value", s.min()).withStyle(ChatFormatting.GRAY));
-                    if (((Number) s.max()).intValue() != Integer.MAX_VALUE) list.add(Component.translatable("misc.apotheosis.max_value", s.max()).withStyle(ChatFormatting.GRAY));
+                    if (s.min().isPresent() || s.max().isPresent()) list.add(Component.literal(" "));
+                    if (s.min().isPresent()) list.add(Component.translatable("misc.apotheosis.min_value", s.min().get()).withStyle(ChatFormatting.GRAY));
+                    if (s.max().isPresent()) list.add(Component.translatable("misc.apotheosis.max_value", s.max().get()).withStyle(ChatFormatting.GRAY));
                 }
                 renderComponentTooltip(scn, gfx, list, left + 6, (int) mouseY, maxWidth, font);
             }

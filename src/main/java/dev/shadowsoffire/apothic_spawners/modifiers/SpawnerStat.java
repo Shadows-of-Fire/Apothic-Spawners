@@ -1,8 +1,11 @@
 package dev.shadowsoffire.apothic_spawners.modifiers;
 
+import java.util.Optional;
+
 import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -10,14 +13,19 @@ import net.minecraft.resources.ResourceLocation;
 public interface SpawnerStat<T> {
 
     /**
-     * Returns a codec that can de/serialize a stat modifier for this stat.
+     * Returns a codec for the value type of this stat.
      */
-    Codec<StatModifier<T>> getModifierCodec();
+    Codec<T> getValueCodec();
 
     /**
      * Gets the current value of this stat.
      */
     T getValue(ApothSpawnerTile spawner);
+
+    /**
+     * Sets the current value of this stat.
+     */
+    void setValue(ApothSpawnerTile spawner, T value);
 
     /**
      * Computes a tooltip to be shown in the item tooltip and Jade/TOP.
@@ -28,13 +36,13 @@ public interface SpawnerStat<T> {
     /**
      * Applies this stat change to the selected spawner.
      *
-     * @param value   The change in value being applied.
-     * @param min     The minimum acceptable value.
-     * @param max     The maximum acceptable value.
      * @param spawner The spawner tile entity.
-     * @return If the application was successful (was a spawner stat changed).
+     * @param value   The change in value being applied.
+     * @param min     The minimum acceptable value, or {@link Optional#empty()} if unlimited.
+     * @param max     The maximum acceptable value, or {@link Optional#empty()} if unlimited.
+     * @return True, if the application was successful (was a spawner stat changed).
      */
-    boolean apply(T value, T min, T max, ApothSpawnerTile spawner);
+    boolean applyModifier(ApothSpawnerTile spawner, T value, Optional<T> min, Optional<T> max);
 
     /**
      * Returns the ID of this spawner stat. Used to build the lang key, and to identify it in json.
@@ -44,10 +52,10 @@ public interface SpawnerStat<T> {
     }
 
     default MutableComponent name() {
-        return Component.translatable("stat.apotheosis." + this.getId().getPath());
+        return Component.translatable(this.getId().toLanguageKey("stat"));
     }
 
     default MutableComponent desc() {
-        return Component.translatable("stat.apotheosis." + this.getId().getPath() + ".desc");
+        return Component.translatable(this.getId().toLanguageKey("stat", "desc"));
     }
 }

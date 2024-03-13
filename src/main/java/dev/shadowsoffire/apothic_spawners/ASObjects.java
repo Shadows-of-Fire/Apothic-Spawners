@@ -6,7 +6,7 @@ import dev.shadowsoffire.apothic_spawners.advancements.ModifierTrigger;
 import dev.shadowsoffire.apothic_spawners.advancements.SpawnEggItemPredicate;
 import dev.shadowsoffire.apothic_spawners.enchantment.CapturingEnchant;
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStats;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.registry.DeferredHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeType;

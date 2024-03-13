@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import dev.shadowsoffire.apothic_spawners.ASConfig.ConfigPayload;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStats;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.network.PayloadHelper;
 import dev.shadowsoffire.placebo.tabs.TabFillingRegistry;
 import net.minecraft.resources.ResourceLocation;

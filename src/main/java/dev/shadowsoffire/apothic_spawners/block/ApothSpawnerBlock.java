@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import dev.shadowsoffire.apothic_spawners.ASConfig;
 import dev.shadowsoffire.apothic_spawners.ASObjects;
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStats;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;

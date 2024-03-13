@@ -1,13 +1,24 @@
 package dev.shadowsoffire.apothic_spawners.block;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
+import com.mojang.serialization.Codec;
+
+import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
+import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStat;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -35,13 +46,7 @@ import net.neoforged.neoforge.event.entity.living.MobSpawnEvent.PositionCheck;
 
 public class ApothSpawnerTile extends SpawnerBlockEntity {
 
-    public boolean ignoresPlayers = false;
-    public boolean ignoresConditions = false;
-    public boolean redstoneControl = false;
-    public boolean ignoresLight = false;
-    public boolean hasNoAI = false;
-    public boolean silent = false;
-    public boolean baby = false;
+    protected final Map<SpawnerStat<?>, Object> customStats = new IdentityHashMap<>();
 
     public ApothSpawnerTile(BlockPos pos, BlockState state) {
         super(pos, state);
@@ -49,32 +54,48 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
     }
 
     @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void saveAdditional(CompoundTag tag) {
-        tag.putBoolean("ignore_players", this.ignoresPlayers);
-        tag.putBoolean("ignore_conditions", this.ignoresConditions);
-        tag.putBoolean("redstone_control", this.redstoneControl);
-        tag.putBoolean("ignore_light", this.ignoresLight);
-        tag.putBoolean("no_ai", this.hasNoAI);
-        tag.putBoolean("silent", this.silent);
-        tag.putBoolean("baby", this.baby);
+        CompoundTag stats = new CompoundTag();
+        customStats.forEach((stat, value) -> {
+            try {
+                Tag encoded = (Tag) ((Codec) stat.getValueCodec()).encodeStart(NbtOps.INSTANCE, value).get().left().get();
+                stats.put(stat.getId().toString(), encoded);
+            }
+            catch (Exception ex) {
+                ApothicSpawners.LOGGER.error("Failed saving spawner stat " + stat.getId(), ex);
+            }
+        });
+        tag.put("stats", stats);
         super.saveAdditional(tag);
     }
 
     @Override
     public void load(CompoundTag tag) {
-        this.ignoresPlayers = tag.getBoolean("ignore_players");
-        this.ignoresConditions = tag.getBoolean("ignore_conditions");
-        this.redstoneControl = tag.getBoolean("redstone_control");
-        this.ignoresLight = tag.getBoolean("ignore_light");
-        this.hasNoAI = tag.getBoolean("no_ai");
-        this.silent = tag.getBoolean("silent");
-        this.baby = tag.getBoolean("baby");
+        CompoundTag stats = tag.getCompound("stats");
+        for (String key : stats.getAllKeys()) {
+            SpawnerStat<?> stat = SpawnerStats.REGISTRY.get(new ResourceLocation(key));
+            if (stat != null) {
+                Tag value = stats.get(key);
+                try {
+                    Object realValue = stat.getValueCodec().decode(NbtOps.INSTANCE, value).get().left().get().getFirst();
+                    customStats.put(stat, realValue);
+                }
+                catch (Exception ex) {
+                    ApothicSpawners.LOGGER.error("Failed loading spawner stat " + key, ex);
+                }
+            }
+        }
         super.load(tag);
     }
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         this.load(pkt.getTag());
+    }
+
+    public Map<SpawnerStat<?>, Object> getStatsMap() {
+        return this.customStats;
     }
 
     public class SpawnerLogicExt extends BaseSpawner {
@@ -109,8 +130,8 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
         }
 
         protected boolean isActivated(Level level, BlockPos pos) {
-            boolean hasPlayer = ApothSpawnerTile.this.ignoresPlayers || this.isNearPlayer(level, pos);
-            return hasPlayer && (!ApothSpawnerTile.this.redstoneControl || ApothSpawnerTile.this.level.hasNeighborSignal(pos));
+            boolean hasPlayer = getStatValue(SpawnerStats.IGNORE_PLAYERS) || this.isNearPlayer(level, pos);
+            return hasPlayer && (!getStatValue(SpawnerStats.REDSTONE_CONTROL) || ApothSpawnerTile.this.level.hasNeighborSignal(pos));
         }
 
         private void delay(Level pLevel, BlockPos pPos) {
@@ -183,8 +204,8 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                             // LOGIC CHANGE : Ability to ignore conditions set in the spawner and by the entity.
                             LyingLevel liar = new LyingLevel(level);
                             boolean useLiar = false;
-                            if (!ApothSpawnerTile.this.ignoresConditions) {
-                                if (ApothSpawnerTile.this.ignoresLight) {
+                            if (!getStatValue(SpawnerStats.IGNORE_CONDITIONS)) {
+                                if (getStatValue(SpawnerStats.IGNORE_LIGHT)) {
                                     boolean pass = false;
                                     for (int light = 0; light < 16; light++) {
                                         liar.setFakeLightLevel(light);
@@ -210,18 +231,18 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                             }
 
                             // Raise the NoAI Flag and set the apotheosis:movable flag for the main mob and all mob passengers.
-                            if (ApothSpawnerTile.this.hasNoAI) {
+                            if (getStatValue(SpawnerStats.NO_AI)) {
                                 entity.getSelfAndPassengers().filter(Mob.class::isInstance).map(Mob.class::cast).forEach(mob -> {
                                     mob.setNoAi(true);
                                     mob.getPersistentData().putBoolean("apotheosis:movable", true);
                                 });
                             }
 
-                            if (ApothSpawnerTile.this.baby && entity instanceof Mob mob) {
+                            if (getStatValue(SpawnerStats.BABY) && entity instanceof Mob mob) {
                                 mob.setBaby(true);
                             }
 
-                            if (ApothSpawnerTile.this.silent) entity.setSilent(true);
+                            if (getStatValue(SpawnerStats.SILENT)) entity.setSilent(true);
 
                             int nearby = level.getEntitiesOfClass(entity.getClass(), new AABB(pPos.getX(), pPos.getY(), pPos.getZ(), pPos.getX() + 1, pPos.getY() + 1, pPos.getZ() + 1).inflate(this.spawnRange)).size();
                             if (nearby >= this.maxNearbyEntities) {
@@ -268,7 +289,7 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
             var event = new PositionCheck(mob, level, spawnType, null);
             NeoForge.EVENT_BUS.post(event);
             if (event.getResult() == Result.DEFAULT) {
-                return ApothSpawnerTile.this.ignoresConditions
+                return getStatValue(SpawnerStats.IGNORE_CONDITIONS)
                     || spawnData.getCustomSpawnRules().isPresent()
                     || mob.checkSpawnRules(level, MobSpawnType.SPAWNER) && mob.checkSpawnObstruction(level);
             }
@@ -285,7 +306,7 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                 }
 
                 SpawnData.CustomSpawnRules customRules = spawnData.getCustomSpawnRules().get();
-                if (ApothSpawnerTile.this.ignoresLight) return true; // All custom spawn rules are light-based, so if we ignore light, we can short-circuit here.
+                if (getStatValue(SpawnerStats.IGNORE_LIGHT)) return true; // All custom spawn rules are light-based, so if we ignore light, we can short-circuit here.
                 if (!customRules.blockLightLimit().isValueInRange(pServerLevel.getBrightness(LightLayer.BLOCK, blockpos))
                     || !customRules.skyLightLimit().isValueInRange(pServerLevel.getBrightness(LightLayer.SKY, blockpos))) {
                     return false;
@@ -295,6 +316,10 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                 return false;
             }
             return true;
+        }
+
+        private <T> T getStatValue(SpawnerStat<T> stat) {
+            return stat.getValue(ApothSpawnerTile.this);
         }
 
     }

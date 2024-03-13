@@ -3,7 +3,7 @@ package dev.shadowsoffire.apothic_spawners.compat;
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerBlock;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
-import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerStats;
+import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
