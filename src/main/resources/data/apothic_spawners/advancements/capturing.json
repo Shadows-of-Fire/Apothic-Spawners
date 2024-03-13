@@ -16,9 +16,9 @@
 		"egg": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
-				"apoth": {
-					"type": "spawn_egg"
-				}
+				"items": [{
+					"type": "apothic_spawners:spawn_egg"
+				}]
 			}
 		}
 	},
