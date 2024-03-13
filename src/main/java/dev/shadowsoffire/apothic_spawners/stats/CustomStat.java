@@ -15,7 +15,7 @@ public abstract class CustomStat<T> implements SpawnerStat<T> {
     @Override
     @SuppressWarnings("unchecked")
     public T getValue(ApothSpawnerTile spawner) {
-        return (T) spawner.getStatsMap().getOrDefault(this, defaultValue);
+        return (T) spawner.getStatsMap().getOrDefault(this, this.defaultValue);
     }
 
     @Override
@@ -25,7 +25,12 @@ public abstract class CustomStat<T> implements SpawnerStat<T> {
 
     @Override
     public final Component getTooltip(ApothSpawnerTile spawner) {
-        return this.getValue(spawner) == this.defaultValue ? CommonComponents.EMPTY : getTooltipImpl(spawner);
+        return this.getValue(spawner) == this.defaultValue ? CommonComponents.EMPTY : this.getTooltipImpl(spawner);
+    }
+
+    @Override
+    public String toString() {
+        return "SpawnerStat{%s}".formatted(SpawnerStats.REGISTRY.getKey(this));
     }
 
     public abstract Component getTooltipImpl(ApothSpawnerTile spawner);

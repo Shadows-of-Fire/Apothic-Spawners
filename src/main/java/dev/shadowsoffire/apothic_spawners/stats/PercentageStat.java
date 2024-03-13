@@ -27,7 +27,7 @@ public class PercentageStat extends CustomStat<Float> {
     @Override
     public boolean applyModifier(ApothSpawnerTile spawner, Float value, Optional<Float> min, Optional<Float> max) {
         Float old = this.getValue(spawner);
-        this.setValue(spawner, clamp(old + value, min, max));
+        this.setValue(spawner, this.clamp(old + value, min, max));
         return old != this.getValue(spawner);
     }
 

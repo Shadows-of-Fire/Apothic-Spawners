@@ -47,8 +47,13 @@ class VanillaStat implements SpawnerStat<Integer> {
     @Override
     public boolean applyModifier(ApothSpawnerTile spawner, Integer value, Optional<Integer> min, Optional<Integer> max) {
         Integer old = this.getValue(spawner);
-        this.setValue(spawner, clamp(old + value, min, max));
+        this.setValue(spawner, this.clamp(old + value, min, max));
         return old != this.getValue(spawner);
+    }
+
+    @Override
+    public String toString() {
+        return "SpawnerStat{%s}".formatted(SpawnerStats.REGISTRY.getKey(this));
     }
 
     private Integer clamp(Integer value, Optional<Integer> min, Optional<Integer> max) {

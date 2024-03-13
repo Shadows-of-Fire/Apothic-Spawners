@@ -21,7 +21,7 @@ public class ASObjects {
 
     public static final Supplier<SpawnerModifier.Serializer> SPAWNER_MODIFIER_SERIALIZER = HELPER.recipeSerializer("spawner_modifier", () -> SpawnerModifier.SERIALIZER);
 
-    public static final Supplier<CapturingEnchant> CAPTURING = HELPER.enchant("capturing", () -> new CapturingEnchant());
+    public static final Supplier<CapturingEnchant> CAPTURING = HELPER.enchant("capturing", CapturingEnchant::new);
 
     public static final Supplier<ModifierTrigger> MODIFIER_TRIGGER = HELPER.custom("spawner_modifier", Registries.TRIGGER_TYPE, ModifierTrigger::new);
 
