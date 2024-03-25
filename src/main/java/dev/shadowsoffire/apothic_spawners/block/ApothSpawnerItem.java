@@ -32,6 +32,9 @@ public class ApothSpawnerItem extends BlockItem {
                 try {
                     String name = tag.getCompound("SpawnData").getCompound("entity").getString("id");
                     EntityType<?> t = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(name));
+                    if (t == null || t == EntityType.PIG && !"minecraft:pig".equals(name)) {
+                        return super.getName(stack);
+                    }
                     MobCategory cat = t.getCategory();
                     ChatFormatting color = switch (cat) {
                         case AMBIENT, CREATURE -> ChatFormatting.DARK_GREEN;
