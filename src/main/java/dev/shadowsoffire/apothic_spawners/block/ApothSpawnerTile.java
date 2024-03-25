@@ -87,7 +87,22 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                 }
             }
         }
+        tryLoad(SpawnerStats.IGNORE_PLAYERS, "ignore_players", tag);
+        tryLoad(SpawnerStats.IGNORE_CONDITIONS, "ignore_conditions", tag);
+        tryLoad(SpawnerStats.REDSTONE_CONTROL, "redstone_control", tag);
+        tryLoad(SpawnerStats.IGNORE_LIGHT, "ignore_light", tag);
+        tryLoad(SpawnerStats.NO_AI, "no_ai", tag);
+        tryLoad(SpawnerStats.SILENT, "silent", tag);
+        tryLoad(SpawnerStats.YOUTHFUL, "baby", tag);
         super.load(tag);
+    }
+
+    // Legacy compat
+    private void tryLoad(SpawnerStat<?> stat, String key, CompoundTag tag) {
+        if (tag.contains(key)) {
+            this.customStats.put(stat, tag.getBoolean(key));
+            tag.remove(key);
+        }
     }
 
     @Override
