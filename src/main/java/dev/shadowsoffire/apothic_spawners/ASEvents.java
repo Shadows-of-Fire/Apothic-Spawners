@@ -24,6 +24,7 @@ import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent.LivingTickEvent;
+import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -108,6 +109,16 @@ public class ASEvents {
         }
         else {
             PacketDistributor.ALL.noArg().send(new ConfigPayload());
+        }
+    }
+
+    @SubscribeEvent
+    public void split(MobSplitEvent e) {
+        if (e.getParent().isNoAi()) {
+            boolean isMoveable = e.getParent().getPersistentData().getBoolean("apotheosis:movable");
+            if (isMoveable) {
+                e.getChildren().forEach(mob -> mob.getPersistentData().putBoolean("apotheosis:movable", true));
+            }
         }
     }
 }
