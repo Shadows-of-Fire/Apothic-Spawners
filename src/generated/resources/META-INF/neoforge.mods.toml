@@ -1,0 +1,41 @@
+modLoader="javafml"
+
+loaderVersion="[2,)"
+
+license="MIT License"
+
+[[mods]] #mandatory
+
+modId="apothic_spawners"
+
+version="1.0.2"
+
+displayName="Apothic Spawners"
+
+authors="Shadows_of_Fire"
+
+description='''The Spawner Module of Apotheosis, allowing for silk-touching and modification.'''
+
+[[mixins]]
+config="apothic_spawners.mixins.json"
+
+[[dependencies.apothic_spawners]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apothic_spawners]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.8,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.apothic_spawners]]
+    modId="placebo"
+    type="required"
+    versionRange="[9.4.0,)"
+    ordering="NONE"
+    side="BOTH"

@@ -1,0 +1,14 @@
+{
+    "required": true,
+    "package": "dev.shadowsoffire.apothic_spawners.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "refmap": "apothic_spawners.refmap.json",
+    "mixins": [
+        "BlocksMixin",
+        "ItemsMixin"
+    ],
+    "client": [
+
+    ],
+    "minVersion": "0.8"
+}
