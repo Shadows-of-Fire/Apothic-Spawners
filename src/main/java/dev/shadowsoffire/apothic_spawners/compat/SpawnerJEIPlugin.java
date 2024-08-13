@@ -15,7 +15,6 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -42,21 +41,21 @@ public class SpawnerJEIPlugin implements IModPlugin {
         reg.addRecipes(SpawnerCategory.TYPE, recipes);
 
         if (ASConfig.spawnerSilkLevel == -1) {
-            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, Component.translatable("info.apothic_spawners.spawner.no_silk"));
+            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, ApothicSpawners.lang("info", "spawner.no_silk"));
         }
         else if (ASConfig.spawnerSilkLevel == 0) {
-            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, Component.translatable("info.apothic_spawners.spawner.always_drop"));
+            reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK, ApothicSpawners.lang("info", "always_drop"));
         }
         else {
             Minecraft.getInstance().level.holder(Enchantments.SILK_TOUCH).ifPresent(silk -> {
                 reg.addIngredientInfo(new ItemStack(Blocks.SPAWNER), VanillaTypes.ITEM_STACK,
-                    Component.translatable("info.apothic_spawners.spawner", ((MutableComponent) Enchantment.getFullname(silk, ASConfig.spawnerSilkLevel)).withStyle(ChatFormatting.DARK_BLUE)));
+                    ApothicSpawners.lang("info", "spawner", ((MutableComponent) Enchantment.getFullname(silk, ASConfig.spawnerSilkLevel)).withStyle(ChatFormatting.DARK_BLUE)));
             });
         }
 
         for (Item i : BuiltInRegistries.ITEM) {
             if (i instanceof SpawnEggItem) {
-                reg.addIngredientInfo(new ItemStack(i), VanillaTypes.ITEM_STACK, Component.translatable("info.apothic_spawners.capturing", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(ASConfig.capturingDropChance * 100)));
+                reg.addIngredientInfo(new ItemStack(i), VanillaTypes.ITEM_STACK, ApothicSpawners.lang("info", "capturing", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(ASConfig.capturingDropChance * 100)));
             }
         }
     }

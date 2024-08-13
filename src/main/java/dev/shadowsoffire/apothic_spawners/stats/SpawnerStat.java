@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.mojang.serialization.Codec;
 
+import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -67,7 +68,7 @@ public interface SpawnerStat<T> {
      * Formats a Stat's name with its value, in the format 'Name: value'.
      */
     static Component createTooltip(SpawnerStat<?> stat, MutableComponent value) {
-        return Component.translatable("misc.apothic_spawners.value_concat", stat.name(), value.withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.GREEN);
+        return ApothicSpawners.lang("misc", "value_concat", stat.name(), value.withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.GREEN);
     }
 
     static Component createTooltip(SpawnerStat<?> stat, String value) {

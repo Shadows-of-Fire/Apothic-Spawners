@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import dev.shadowsoffire.apothic_spawners.ASConfig;
 import dev.shadowsoffire.apothic_spawners.ASObjects;
+import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.ChatFormatting;
@@ -136,7 +137,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
                 SpawnerStats.generateTooltip(tooltipTile, tooltip::add);
             }
             else {
-                tooltip.add(Component.translatable("misc.apothic_spawners.shift_stats").withStyle(ChatFormatting.GRAY));
+                tooltip.add(ApothicSpawners.lang("misc", "shift_stats").withStyle(ChatFormatting.GRAY));
             }
         }
     }

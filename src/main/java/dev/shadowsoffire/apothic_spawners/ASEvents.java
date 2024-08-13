@@ -12,7 +12,6 @@ import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.events.ResourceReloadEvent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.Unit;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -98,7 +97,7 @@ public class ASEvents {
         ItemStack s = e.getItemStack();
         if (s.getItem() instanceof SpawnEggItem egg) {
             EntityType<?> type = egg.getType(s);
-            if (ASConfig.bannedMobs.contains(EntityType.getKey(type))) e.getToolTip().add(Component.translatable("misc.apotheosis.banned").withStyle(ChatFormatting.GRAY));
+            if (ASConfig.bannedMobs.contains(EntityType.getKey(type))) e.getToolTip().add(ApothicSpawners.lang("misc", "banned").withStyle(ChatFormatting.GRAY));
         }
     }
 

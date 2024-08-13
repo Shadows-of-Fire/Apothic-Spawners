@@ -8,6 +8,8 @@ import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.network.PayloadHelper;
 import dev.shadowsoffire.placebo.tabs.TabFillingRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -49,6 +51,10 @@ public class ApothicSpawners {
 
     public static ResourceLocation loc(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
+
+    public static MutableComponent lang(String type, String path, Object... args) {
+        return Component.translatable(type + "." + MODID + "." + path, args);
     }
 
 }

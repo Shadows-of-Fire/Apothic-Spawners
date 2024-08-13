@@ -7,7 +7,6 @@ import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import snownee.jade.api.BlockAccessor;
@@ -40,7 +39,9 @@ public class SpawnerHwylaPlugin implements IWailaPlugin, IBlockComponentProvider
             tile.loadAdditional(accessor.getServerData(), accessor.getLevel().registryAccess());
             SpawnerStats.generateTooltip(tile, tooltip::add);
         }
-        else tooltip.add(Component.translatable("misc.apothic_spawners.ctrl_stats"));
+        else {
+            tooltip.add(ApothicSpawners.lang("misc", "ctrl_stats"));
+        }
     }
 
     @Override
