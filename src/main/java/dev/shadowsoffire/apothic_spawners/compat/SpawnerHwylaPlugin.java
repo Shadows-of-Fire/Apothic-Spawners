@@ -36,7 +36,7 @@ public class SpawnerHwylaPlugin implements IWailaPlugin, IBlockComponentProvider
     @Override
     public void appendTooltip(ITooltip tooltip, BlockAccessor accessor, IPluginConfig config) {
         if (Screen.hasControlDown()) {
-            ApothSpawnerTile tile = new ApothSpawnerTile(BlockPos.ZERO, Blocks.AIR.defaultBlockState());
+            ApothSpawnerTile tile = new ApothSpawnerTile(BlockPos.ZERO, Blocks.SPAWNER.defaultBlockState());
             tile.loadAdditional(accessor.getServerData(), accessor.getLevel().registryAccess());
             SpawnerStats.generateTooltip(tile, tooltip::add);
         }

@@ -131,7 +131,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
         if (stack.has(DataComponents.BLOCK_ENTITY_DATA)) {
             if (Screen.hasShiftDown()) {
                 CustomData data = stack.get(DataComponents.BLOCK_ENTITY_DATA);
-                ApothSpawnerTile tooltipTile = new ApothSpawnerTile(BlockPos.ZERO, Blocks.AIR.defaultBlockState());
+                ApothSpawnerTile tooltipTile = new ApothSpawnerTile(BlockPos.ZERO, Blocks.SPAWNER.defaultBlockState());
                 data.loadInto(tooltipTile, context.registries());
                 SpawnerStats.generateTooltip(tooltipTile, tooltip::add);
             }

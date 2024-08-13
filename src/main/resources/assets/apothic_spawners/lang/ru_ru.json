@@ -1,5 +1,5 @@
 {
-	"item.apothic_spawners.spawner": "Рассадник %s",
+    "item.apothic_spawners.spawner": "Рассадник %s",
 	
     "enchantment.apothic_spawners.capturing": "Захват",
     "enchantment.apothic_spawners.capturing.desc": "Даёт мобам шанс выбросить их яйцо спавна.",
