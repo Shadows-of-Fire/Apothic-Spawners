@@ -26,15 +26,12 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.fml.ModList;
 
 @JeiPlugin
 public class SpawnerJEIPlugin implements IModPlugin {
-    private static final boolean IS_EMI_LOADED = ModList.get().isLoaded("emi"); // Prevents potential double plugin loading issues
 
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
-        if (IS_EMI_LOADED) return;
         List<SpawnerModifier> recipes = Minecraft.getInstance().level.getRecipeManager()
             .getAllRecipesFor(ASObjects.SPAWNER_MODIFIER.get())
             .stream()
@@ -66,13 +63,11 @@ public class SpawnerJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
-        if (IS_EMI_LOADED) return;
         reg.addRecipeCatalyst(new ItemStack(Blocks.SPAWNER), SpawnerCategory.TYPE);
     }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration reg) {
-        if (IS_EMI_LOADED) return;
         reg.addRecipeCategories(new SpawnerCategory(reg.getJeiHelpers().getGuiHelper()));
     }
 
