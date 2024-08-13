@@ -1,13 +1,20 @@
 package dev.shadowsoffire.apothic_spawners;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 
 import dev.shadowsoffire.placebo.config.Configuration;
 import dev.shadowsoffire.placebo.network.PayloadProvider;
 import net.minecraft.ResourceLocationException;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.ConnectionProtocol;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -38,16 +45,22 @@ public class ASConfig {
         capturingDropChance = config.getFloat("Capturing Drop Chance", "general", 0.005F, 0.001F, 1F, "The per-level drop chance (1 = 100%) of Spawn Eggs when using Capturing.\nSynced.");
 
         bannedMobs.clear();
-        String[] bans = config.getStringList("Banned Mobs", "spawn_eggs", DEFAULT_BANNED_MOBS, "A list of entity registry names that cannot be applied to spawners via egg.\nSynced.");
+        String[] bans = config.getStringList("Banned Mobs", "spawn_eggs", DEFAULT_BANNED_MOBS, "A list of entity registry names that cannot be applied to spawners via egg. Supports regex.\nSynced.");
 
-        for (String s : bans)
+        List<Predicate<String>> patterns = new ArrayList<>(bans.length);
+        for (String banRegex : bans) {
             try {
-                bannedMobs.add(ResourceLocation.parse(s));
+                Pattern p = Pattern.compile(banRegex);
+                patterns.add(s -> p.matcher(s).matches());
             }
-            catch (ResourceLocationException ex) {
-                ApothicSpawners.LOGGER.error("Invalid entry {} detected in the spawner banned mobs list.", s);
+            catch (PatternSyntaxException | ResourceLocationException ex) {
+                ApothicSpawners.LOGGER.error("Invalid entry {} detected in the spawner banned mobs list.", banRegex);
                 ex.printStackTrace();
             }
+        }
+        Predicate<String> filter = Predicates.or(patterns);
+        BuiltInRegistries.ENTITY_TYPE.keySet().stream().filter(rl -> filter.apply(rl.toString())).forEach(bannedMobs::add);
+        ApothicSpawners.LOGGER.info("Banned {} mobs from being applicable to spawners.", bannedMobs.size());
 
         if (config.hasChanged()) {
             config.save();
