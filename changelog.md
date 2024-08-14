@@ -1,3 +1,9 @@
+## 1.1.0
+* Updated to Minecraft 1.21.1.
+* Fixed an issue where rendering spawner stat tooltips would crash.
+* The Banned Mobs config is now treated as a list of regex patterns.
+* Quark: Added Russian translation.
+
 ## 1.0.2
 * Updated to Placebo 9.3.5.
 
