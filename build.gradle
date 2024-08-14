@@ -59,7 +59,7 @@ neoForge {
     ideSyncTask generateModMetadata
 
     neoFormRuntime {
-        useEclipseCompiler = true // Allows for parallelism on recompile
+        useEclipseCompiler = false // Allows for parallelism on recompile
         version = "1.0.3"
     }
 }
@@ -107,18 +107,24 @@ repositories {
     }
 }
 
+configurations {
+    compileClasspath.extendsFrom localImplementation
+    runtimeClasspath.extendsFrom localImplementation
+    runtimeClasspath.extendsFrom localRuntime
+}
+
 dependencies {
     if (project.mixin.toBoolean())                   annotationProcessor "org.spongepowered:mixin:${mixinVersion}:processor"
-    if (project.hasProperty('placeboVersion'))       implementation "dev.shadowsoffire:Placebo:${mcVersion}-${placeboVersion}"
-    if (project.hasProperty('jeiVersion'))           implementation "mezz.jei:jei-${mcVersion}-neoforge:${jeiVersion}"
-    if (project.hasProperty('jadeVersion'))          implementation "snownee.jade:Jade-NeoForge:${mcVersion}-${jadeVersion}"
-    if (project.hasProperty('curiosVersion'))        implementation "top.theillusivec4.curios:curios-neoforge:${curiosVersion}"
-    if (project.hasProperty('patchouliVersion'))     implementation "vazkii.patchouli:Patchouli:${patchouliVersion}"
-    if (project.hasProperty('bookshelfVersion'))     compileOnly    "net.darkhax.bookshelf:Bookshelf-Forge-${mcVersion}:${bookshelfVersion}"
-    if (project.hasProperty('gamestagesVersion'))    compileOnly    "net.darkhax.gamestages:GameStages-Forge-${mcVersion}:${gamestagesVersion}"
-    if (project.hasProperty('twilightFileId'))       implementation "curse.maven:the-twilight-forest-227639:${twilightFileId}"
-    if (project.hasProperty('gatewaysVersion'))      implementation "dev.shadowsoffire:GatewaysToEternity:${mcVersion}-${gatewaysVersion}"
-    if (project.hasProperty('attributeslibVersion')) implementation "dev.shadowsoffire:ApothicAttributes:${mcVersion}-${attributeslibVersion}"
+    if (project.hasProperty('placeboVersion'))       implementation      "dev.shadowsoffire:Placebo:${mcVersion}-${placeboVersion}"
+    if (project.hasProperty('jeiVersion'))           localImplementation "mezz.jei:jei-${mcVersion}-neoforge:${jeiVersion}"
+    if (project.hasProperty('jadeVersion'))          localImplementation "snownee.jade:Jade-NeoForge:${mcVersion}-${jadeVersion}"
+    if (project.hasProperty('curiosVersion'))        implementation      "top.theillusivec4.curios:curios-neoforge:${curiosVersion}"
+    if (project.hasProperty('patchouliVersion'))     implementation      "vazkii.patchouli:Patchouli:${patchouliVersion}"
+    if (project.hasProperty('bookshelfVersion'))     localImplementation "net.darkhax.bookshelf:Bookshelf-Forge-${mcVersion}:${bookshelfVersion}"
+    if (project.hasProperty('gamestagesVersion'))    localImplementation "net.darkhax.gamestages:GameStages-Forge-${mcVersion}:${gamestagesVersion}"
+    if (project.hasProperty('twilightFileId'))       localImplementation "curse.maven:the-twilight-forest-227639:${twilightFileId}"
+    if (project.hasProperty('gatewaysVersion'))      localImplementation "dev.shadowsoffire:GatewaysToEternity:${mcVersion}-${gatewaysVersion}"
+    if (project.hasProperty('attributeslibVersion')) implementation      "dev.shadowsoffire:ApothicAttributes:${mcVersion}-${attributeslibVersion}"
 }
 
 tasks.named("generateModMetadata") {
