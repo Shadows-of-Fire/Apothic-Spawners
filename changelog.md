@@ -1,3 +1,6 @@
+## 1.1.1
+* Fixed a potential CME when calling `StatModifier.modifierCodec`.
+
 ## 1.1.0
 * Updated to Minecraft 1.21.1.
 * Fixed an issue where rendering spawner stat tooltips would crash.
