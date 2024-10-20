@@ -1,8 +1,8 @@
 package dev.shadowsoffire.apothic_spawners.modifiers;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -21,7 +21,7 @@ import net.minecraft.network.FriendlyByteBuf;
  */
 public record StatModifier<T>(SpawnerStat<T> stat, T value, Optional<T> min, Optional<T> max) {
 
-    private static final Map<SpawnerStat<?>, MapCodec<StatModifier<?>>> CODEC_CACHE = new HashMap<>();
+    private static final Map<SpawnerStat<?>, MapCodec<StatModifier<?>>> CODEC_CACHE = new ConcurrentHashMap<>();
 
     public static final Codec<StatModifier<?>> CODEC = Codec.lazyInitialized(() -> SpawnerStats.REGISTRY.byNameCodec().dispatch(StatModifier::stat, StatModifier::modifierCodec));
 
