@@ -29,6 +29,7 @@ import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.living.MobDespawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -143,6 +144,14 @@ public class ASEvents {
             if (isMoveable) {
                 e.getChildren().forEach(mob -> mob.getPersistentData().putBoolean("apotheosis:movable", true));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onDespawn(MobDespawnEvent e) {
+        Entity ent = e.getEntity();
+        if (ASConfig.entityDespawnDelay >= ent.tickCount) {
+            e.setResult(MobDespawnEvent.Result.DENY);
         }
     }
 }

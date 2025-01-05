@@ -33,6 +33,7 @@ public class ASConfig {
     public static int spawnerSilkDamage;
     public static float capturingDropChance;
     public static boolean spawnersDropEmpty;
+    public static int entityDespawnDelay;
     public static Set<ResourceLocation> bannedMobs = new HashSet<>();
 
     public static void load() {
@@ -46,6 +47,8 @@ public class ASConfig {
         capturingDropChance = config.getFloat("Capturing Drop Chance", "general", 0.005F, 0.001F, 1F, "The per-level drop chance (1 = 100%) of Spawn Eggs when using Capturing.\nSynced.");
 
         spawnersDropEmpty = config.getBoolean("Spawners Drop Empty", "general", false, "If spawners should clear their contained entity when broken.\nServer-authoritative.");
+
+        entityDespawnDelay = config.getInt("Entity Despawn Delay", "general", 600, 0, 24000, "The time, in ticks, that mobs will be prevented from despawning for after they have spawned.\nServer-authoritative.");
 
         bannedMobs.clear();
         String[] bans = config.getStringList("Banned Mobs", "spawn_eggs", DEFAULT_BANNED_MOBS, "A list of entity registry names that cannot be applied to spawners via egg. Supports regex.\nSynced.");
