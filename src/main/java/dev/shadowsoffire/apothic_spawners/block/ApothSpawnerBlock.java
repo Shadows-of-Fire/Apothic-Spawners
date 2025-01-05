@@ -17,6 +17,7 @@ import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -92,7 +93,11 @@ public class ApothSpawnerBlock extends SpawnerBlock {
         if (silkTouch.isPresent() && ASConfig.spawnerSilkLevel != -1 && tool.getEnchantmentLevel(silkTouch.get()) >= ASConfig.spawnerSilkLevel) {
             ItemStack s = new ItemStack(this);
             BlockEntity te = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
-            if (te != null) {
+            if (te instanceof ApothSpawnerTile spawner) {
+                if (ASConfig.spawnersDropEmpty) {
+                    spawner.getSpawner().spawnPotentials = SimpleWeightedRandomList.empty();
+                    spawner.getSpawner().nextSpawnData = null;
+                }
                 te.saveToItem(s, params.getLevel().registryAccess());
             }
             return List.of(s);
