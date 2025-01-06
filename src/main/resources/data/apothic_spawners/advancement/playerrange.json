@@ -2,7 +2,7 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:prismarine_crystals"
+			"id": "minecraft:prismarine_crystals"
 		},
 		"title": {
 			"translate": "advancements.apothic_spawners.playerrange"
@@ -27,5 +27,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

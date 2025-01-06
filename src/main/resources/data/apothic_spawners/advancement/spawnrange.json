@@ -2,13 +2,13 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:soul_lantern"
+			"id": "minecraft:piston"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.light"
+			"translate": "advancements.apothic_spawners.spawnrange"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.light.desc"
+			"translate": "advancements.apothic_spawners.spawnrange.desc"
 		},
 		"frame": "goal"
 	},
@@ -16,7 +16,10 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"ignore_light": true
+				"modifier": "spawn_range",
+				"spawn_range": {
+					"min": 32
+				}
 			}
 		}
 	},
@@ -24,5 +27,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

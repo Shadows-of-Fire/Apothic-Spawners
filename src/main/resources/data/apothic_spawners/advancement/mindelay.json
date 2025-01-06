@@ -2,13 +2,13 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:clock"
+			"id": "minecraft:sugar"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.maxdelay"
+			"translate": "advancements.apothic_spawners.mindelay"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.maxdelay.desc"
+			"translate": "advancements.apothic_spawners.mindelay.desc"
 		},
 		"frame": "goal"
 	},
@@ -16,8 +16,8 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"modifier": "max_delay",
-				"max_delay": {
+				"modifier": "min_delay",
+				"min_delay": {
 					"max": 20,
 					"min": 0
 				}
@@ -28,5 +28,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

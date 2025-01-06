@@ -2,8 +2,10 @@
 	"parent": "apothic_spawners:conditions",
 	"display": {
 		"icon": {
-			"item": "minecraft:spawner",
-			"nbt": "{Enchantments:[{id:\"minecraft:sharpness\",lvl:1s}]}"
+			"id": "minecraft:spawner",
+			"components": {
+				"enchantment_glint_override": true
+			}
 		},
 		"title": {
 			"translate": "advancements.apothic_spawners.ultimate_spawner"
@@ -36,5 +38,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+	"sends_telemetry_event": true
 }

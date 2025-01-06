@@ -2,13 +2,13 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:ghast_tear"
+			"id": "minecraft:clock"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.nearbyents"
+			"translate": "advancements.apothic_spawners.maxdelay"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.nearbyents.desc"
+			"translate": "advancements.apothic_spawners.maxdelay.desc"
 		},
 		"frame": "goal"
 	},
@@ -16,9 +16,10 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"modifier": "max_nearby_entities",
-				"max_nearby_entities": {
-					"min": 32
+				"modifier": "max_delay",
+				"max_delay": {
+					"max": 20,
+					"min": 0
 				}
 			}
 		}
@@ -27,5 +28,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

@@ -2,13 +2,13 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:piston"
+			"id": "minecraft:fermented_spider_eye"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.spawnrange"
+			"translate": "advancements.apothic_spawners.spawncount"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.spawnrange.desc"
+			"translate": "advancements.apothic_spawners.spawncount.desc"
 		},
 		"frame": "goal"
 	},
@@ -16,9 +16,9 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"modifier": "spawn_range",
-				"spawn_range": {
-					"min": 32
+				"modifier": "spawn_count",
+				"spawn_count": {
+					"min": 16
 				}
 			}
 		}
@@ -27,5 +27,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

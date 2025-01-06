@@ -1,14 +1,14 @@
 {
-	"parent": "apothic_spawners:playerrange",
+	"parent": "apothic_spawners:light",
 	"display": {
 		"icon": {
-			"item": "minecraft:nether_star"
+			"id": "minecraft:conduit"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.players"
+			"translate": "advancements.apothic_spawners.conditions"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.players.desc"
+			"translate": "advancements.apothic_spawners.conditions.desc"
 		},
 		"frame": "challenge"
 	},
@@ -16,7 +16,7 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"ignore_players": true
+				"ignore_conditions": true
 			}
 		}
 	},
@@ -24,5 +24,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

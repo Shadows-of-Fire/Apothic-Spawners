@@ -2,13 +2,13 @@
 	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:comparator"
+			"id": "minecraft:ghast_tear"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.redstone"
+			"translate": "advancements.apothic_spawners.nearbyents"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.redstone.desc"
+			"translate": "advancements.apothic_spawners.nearbyents.desc"
 		},
 		"frame": "goal"
 	},
@@ -16,7 +16,10 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"redstone_control": true
+				"modifier": "max_nearby_entities",
+				"max_nearby_entities": {
+					"min": 32
+				}
 			}
 		}
 	},
@@ -24,5 +27,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

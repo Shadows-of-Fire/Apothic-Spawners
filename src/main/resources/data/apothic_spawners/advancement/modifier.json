@@ -2,7 +2,7 @@
 	"parent": "apothic_spawners:root",
 	"display": {
 		"icon": {
-			"item": "minecraft:sugar"
+			"id": "minecraft:sugar"
 		},
 		"title": {
 			"translate": "advancements.apothic_spawners.modifier"
@@ -22,5 +22,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

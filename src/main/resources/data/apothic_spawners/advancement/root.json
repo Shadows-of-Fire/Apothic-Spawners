@@ -1,7 +1,7 @@
 {
 	"display": {
 		"icon": {
-			"item": "minecraft:spawner"
+			"id": "minecraft:spawner"
 		},
 		"title": {
 			"translate": "advancements.apothic_spawners.spawner"
@@ -26,5 +26,6 @@
 		[
 			"spawner"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

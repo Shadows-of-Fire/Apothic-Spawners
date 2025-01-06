@@ -2,7 +2,7 @@
 	"parent": "apothic_spawners:root",
 	"display": {
 		"icon": {
-			"item": "minecraft:witch_spawn_egg"
+			"id": "minecraft:witch_spawn_egg"
 		},
 		"title": {
 			"translate": "advancements.apothic_spawners.capturing"
@@ -26,5 +26,6 @@
 		[
 			"egg"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }

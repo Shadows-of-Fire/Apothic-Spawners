@@ -1,14 +1,14 @@
 {
-	"parent": "apothic_spawners:light",
+	"parent": "apothic_spawners:modifier",
 	"display": {
 		"icon": {
-			"item": "minecraft:conduit"
+			"id": "minecraft:chorus_fruit"
 		},
 		"title": {
-			"translate": "advancements.apothic_spawners.conditions"
+			"translate": "advancements.apothic_spawners.noai"
 		},
 		"description": {
-			"translate": "advancements.apothic_spawners.conditions.desc"
+			"translate": "advancements.apothic_spawners.noai.desc"
 		},
 		"frame": "challenge"
 	},
@@ -16,7 +16,7 @@
 		"modifier": {
 			"trigger": "apothic_spawners:spawner_modifier",
 			"conditions": {
-				"ignore_conditions": true
+				"no_ai": true
 			}
 		}
 	},
@@ -24,5 +24,6 @@
 		[
 			"modifier"
 		]
-	]
+	],
+    "sends_telemetry_event": true
 }
