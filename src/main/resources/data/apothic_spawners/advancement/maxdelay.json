@@ -1,33 +1,33 @@
 {
-	"parent": "apothic_spawners:modifier",
-	"display": {
-		"icon": {
-			"id": "minecraft:clock"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.maxdelay"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.maxdelay.desc"
-		},
-		"frame": "goal"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"modifier": "max_delay",
-				"max_delay": {
-					"max": 20,
-					"min": 0
-				}
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:modifier",
+    "display": {
+        "icon": {
+            "id": "minecraft:clock"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.maxdelay"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.maxdelay.desc"
+        },
+        "frame": "goal"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "modifier": "max_delay",
+                "max_delay": {
+                    "max": 20,
+                    "min": 0
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

@@ -1,29 +1,29 @@
 {
-	"parent": "apothic_spawners:modifier",
-	"display": {
-		"icon": {
-			"id": "minecraft:comparator"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.redstone"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.redstone.desc"
-		},
-		"frame": "goal"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"redstone_control": true
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:modifier",
+    "display": {
+        "icon": {
+            "id": "minecraft:comparator"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.redstone"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.redstone.desc"
+        },
+        "frame": "goal"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "redstone_control": true
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

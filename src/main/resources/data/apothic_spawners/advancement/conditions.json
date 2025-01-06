@@ -1,29 +1,29 @@
 {
-	"parent": "apothic_spawners:light",
-	"display": {
-		"icon": {
-			"id": "minecraft:conduit"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.conditions"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.conditions.desc"
-		},
-		"frame": "challenge"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"ignore_conditions": true
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:light",
+    "display": {
+        "icon": {
+            "id": "minecraft:conduit"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.conditions"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.conditions.desc"
+        },
+        "frame": "challenge"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "ignore_conditions": true
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

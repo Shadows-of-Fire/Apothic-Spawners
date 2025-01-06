@@ -1,43 +1,43 @@
 {
-	"parent": "apothic_spawners:conditions",
-	"display": {
-		"icon": {
-			"id": "minecraft:spawner",
-			"components": {
-				"enchantment_glint_override": true
-			}
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.ultimate_spawner"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.ultimate_spawner.desc"
-		},
-		"frame": "challenge"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"min_delay": {
-					"max": 20,
-					"min": 0
-				},
-				"max_delay": {
-					"max": 20,
-					"min": 0
-				},
-				"ignore_players": true,
-				"ignore_conditions": true,
-				"no_ai": true,
-				"redstone_control": true
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
-	"sends_telemetry_event": true
+    "parent": "apothic_spawners:conditions",
+    "display": {
+        "icon": {
+            "id": "minecraft:spawner",
+            "components": {
+                "enchantment_glint_override": true
+            }
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.ultimate_spawner"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.ultimate_spawner.desc"
+        },
+        "frame": "challenge"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "min_delay": {
+                    "max": 20,
+                    "min": 0
+                },
+                "max_delay": {
+                    "max": 20,
+                    "min": 0
+                },
+                "ignore_players": true,
+                "ignore_conditions": true,
+                "no_ai": true,
+                "redstone_control": true
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
+    "sends_telemetry_event": true
 }

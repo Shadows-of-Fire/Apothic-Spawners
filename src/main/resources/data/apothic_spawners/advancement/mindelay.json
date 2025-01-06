@@ -1,33 +1,33 @@
 {
-	"parent": "apothic_spawners:modifier",
-	"display": {
-		"icon": {
-			"id": "minecraft:sugar"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.mindelay"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.mindelay.desc"
-		},
-		"frame": "goal"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"modifier": "min_delay",
-				"min_delay": {
-					"max": 20,
-					"min": 0
-				}
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:modifier",
+    "display": {
+        "icon": {
+            "id": "minecraft:sugar"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.mindelay"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.mindelay.desc"
+        },
+        "frame": "goal"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "modifier": "min_delay",
+                "min_delay": {
+                    "max": 20,
+                    "min": 0
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

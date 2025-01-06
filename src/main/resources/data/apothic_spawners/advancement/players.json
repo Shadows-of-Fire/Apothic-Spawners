@@ -1,29 +1,29 @@
 {
-	"parent": "apothic_spawners:playerrange",
-	"display": {
-		"icon": {
-			"id": "minecraft:nether_star"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.players"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.players.desc"
-		},
-		"frame": "challenge"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"ignore_players": true
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:playerrange",
+    "display": {
+        "icon": {
+            "id": "minecraft:nether_star"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.players"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.players.desc"
+        },
+        "frame": "challenge"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "ignore_players": true
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

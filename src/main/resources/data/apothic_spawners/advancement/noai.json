@@ -1,29 +1,29 @@
 {
-	"parent": "apothic_spawners:modifier",
-	"display": {
-		"icon": {
-			"id": "minecraft:chorus_fruit"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.noai"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.noai.desc"
-		},
-		"frame": "challenge"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"no_ai": true
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:modifier",
+    "display": {
+        "icon": {
+            "id": "minecraft:chorus_fruit"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.noai"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.noai.desc"
+        },
+        "frame": "challenge"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "no_ai": true
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

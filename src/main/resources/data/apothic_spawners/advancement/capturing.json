@@ -1,31 +1,31 @@
 {
-	"parent": "apothic_spawners:root",
-	"display": {
-		"icon": {
-			"id": "minecraft:witch_spawn_egg"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.capturing"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.capturing.desc"
-		},
-		"frame": "task"
-	},
-	"criteria": {
-		"egg": {
-			"trigger": "minecraft:inventory_changed",
-			"conditions": {
-				"items": [{
-					"type": "apothic_spawners:spawn_egg"
-				}]
-			}
-		}
-	},
-	"requirements": [
-		[
-			"egg"
-		]
-	],
+    "parent": "apothic_spawners:root",
+    "display": {
+        "icon": {
+            "id": "minecraft:witch_spawn_egg"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.capturing"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.capturing.desc"
+        },
+        "frame": "task"
+    },
+    "criteria": {
+        "egg": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [{
+                    "type": "apothic_spawners:spawn_egg"
+                }]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "egg"
+        ]
+    ],
     "sends_telemetry_event": true
 }

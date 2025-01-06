@@ -1,32 +1,32 @@
 {
-	"parent": "apothic_spawners:modifier",
-	"display": {
-		"icon": {
-			"id": "minecraft:fermented_spider_eye"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.spawncount"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.spawncount.desc"
-		},
-		"frame": "goal"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"modifier": "spawn_count",
-				"spawn_count": {
-					"min": 16
-				}
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:modifier",
+    "display": {
+        "icon": {
+            "id": "minecraft:fermented_spider_eye"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.spawncount"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.spawncount.desc"
+        },
+        "frame": "goal"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "modifier": "spawn_count",
+                "spawn_count": {
+                    "min": 16
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }

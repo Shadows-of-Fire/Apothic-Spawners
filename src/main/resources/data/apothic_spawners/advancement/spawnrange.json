@@ -1,32 +1,32 @@
 {
-	"parent": "apothic_spawners:modifier",
-	"display": {
-		"icon": {
-			"id": "minecraft:piston"
-		},
-		"title": {
-			"translate": "advancements.apothic_spawners.spawnrange"
-		},
-		"description": {
-			"translate": "advancements.apothic_spawners.spawnrange.desc"
-		},
-		"frame": "goal"
-	},
-	"criteria": {
-		"modifier": {
-			"trigger": "apothic_spawners:spawner_modifier",
-			"conditions": {
-				"modifier": "spawn_range",
-				"spawn_range": {
-					"min": 32
-				}
-			}
-		}
-	},
-	"requirements": [
-		[
-			"modifier"
-		]
-	],
+    "parent": "apothic_spawners:modifier",
+    "display": {
+        "icon": {
+            "id": "minecraft:piston"
+        },
+        "title": {
+            "translate": "advancements.apothic_spawners.spawnrange"
+        },
+        "description": {
+            "translate": "advancements.apothic_spawners.spawnrange.desc"
+        },
+        "frame": "goal"
+    },
+    "criteria": {
+        "modifier": {
+            "trigger": "apothic_spawners:spawner_modifier",
+            "conditions": {
+                "modifier": "spawn_range",
+                "spawn_range": {
+                    "min": 32
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "modifier"
+        ]
+    ],
     "sends_telemetry_event": true
 }
