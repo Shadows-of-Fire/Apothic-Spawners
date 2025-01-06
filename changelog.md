@@ -1,3 +1,12 @@
+## 1.2.0
+* Fixed all advancments not loading.
+  * These files were left in the old file path `/advancements` (plural) after the 1.20 migration, which caused them to not load.
+* Added a config option to make spawners lose their stored entity when broken with silk touch.
+  * All stats are retained, and the entity is lost each time the spawner is broken.
+* Directly integrated the functionality of the Mob Despawn Timers mod.
+  * This is most relevant here, since people tend to run into this bug when working with spawners.
+* A stock datapack artifact will now be published to CurseForge with each release of the mod.
+
 ## 1.1.1
 * Fixed a potential CME when calling `StatModifier.modifierCodec`.
 
