@@ -1,0 +1,112 @@
+{
+    "item.apothic_spawners.spawner": "%s Canavar Çağırıcı",
+
+    "enchantment.apothic_spawners.capturing": "Yakalama",
+    "enchantment.apothic_spawners.capturing.desc": "Canavarların çağırma yumurtalarını düşürme şansı olur.",
+
+    "misc.apothic_spawners.concat": "%s %s",
+    "misc.apothic_spawners.value_concat": "%s: %s",
+    "misc.apothic_spawners.min_value": "En Düşük Değer: %s",
+    "misc.apothic_spawners.max_value": "En Yüksek Değer: %s",
+    "misc.apothic_spawners.mainhand": "Ana Elinde Tutulur",
+    "misc.apothic_spawners.offhand": "Diğer Elinde Tutulur",
+    "misc.apothic_spawners.not_consumed": "Bu eşya tüketilmez",
+    "misc.apothic_spawners.rclick_spawner": "Canavar Çağırıcısına Sağ Tıkla",
+    "misc.apothic_spawners.entity": "Varlık",
+    "misc.apothic_spawners.shift_stats": "İstatistikler için Shift'e basılı tut",
+    "misc.apothic_spawners.ctrl_stats": "İstatistikler için Ctrl'ye basılı tut",
+    "misc.apothic_spawners.banned": "Canavar Çağırıcısında kullanılamaz",
+	
+    "stat.apothic_spawners.min_delay": "En Düşük Doğma Gecikmesi",
+    "stat.apothic_spawners.min_delay.desc": "Doğmalar arasındaki en düşük tik sayısı",
+
+    "stat.apothic_spawners.max_delay": "En Yüksek Doğma Gecikmesi",
+    "stat.apothic_spawners.max_delay.desc": "Doğmalar arasındaki en yüksek tik sayısı",
+
+    "stat.apothic_spawners.spawn_count": "Doğma Sayısı",
+    "stat.apothic_spawners.spawn_count.desc": "Aynı anda doğan varlıkların sayısı",
+
+    "stat.apothic_spawners.max_nearby_entities": "En Fazla Varlık",
+    "stat.apothic_spawners.max_nearby_entities.desc": "Yakındaki izin verilen toplam varlık sayısı",
+
+    "stat.apothic_spawners.req_player_range": "Etkinleştirme Menzili",
+    "stat.apothic_spawners.req_player_range.desc": "Bir oyuncunun doğma durmadan önce ne kadar uzakta olabileceği",
+	
+    "stat.apothic_spawners.spawn_range": "Doğma Menzili",
+    "stat.apothic_spawners.spawn_range.desc": "Canavarların doğabileceği yarıçap (blok cinsinden)",
+
+    "stat.apothic_spawners.ignore_players": "Oyuncuları Yoksayar",
+    "stat.apothic_spawners.ignore_players.desc": "Canavar Çağırıcı, yakındaki bir oyuncuya ihtiyaç duymaz",
+
+    "stat.apothic_spawners.ignore_conditions": "Koşulları Yoksayar",
+    "stat.apothic_spawners.ignore_conditions.desc": "Canavar Çağırıcı, doğma koşullarını yoksayar",
+
+    "stat.apothic_spawners.redstone_control": "Redstone Kontrolü",
+    "stat.apothic_spawners.redstone_control.desc": "Canavar Çağırıcının etkinleşmesi için redstone'a ihtiyacı vardır",
+
+    "stat.apothic_spawners.ignore_light": "Işığı Yoksayar",
+    "stat.apothic_spawners.ignore_light.desc": "Canavar Çağırıcı, ışık seviyelerini yoksayar",
+	
+    "stat.apothic_spawners.no_ai": "YZ Yok",
+    "stat.apothic_spawners.no_ai.desc": "Doğan varlıklar yapay zeka kullanmaz",
+
+    "stat.apothic_spawners.silent": "Sessiz",
+    "stat.apothic_spawners.silent.desc": "Doğan varlıklar hiç ses çıkarmaz",
+
+    "stat.apothic_spawners.youthful": "Genç",
+    "stat.apothic_spawners.youthful.desc": "Canavar Çağırıcı, mümkün olduğunda her zaman bebek varlık üretir",
+
+    "stat.apothic_spawners.initial_health": "Başlangıç Sağlığı",
+    "stat.apothic_spawners.initial_health.desc": "Doğan canavarların başlangıç sağlık yüzdesi",
+
+    "stat.apothic_spawners.burning": "Yanma",
+    "stat.apothic_spawners.burning.desc": "Üretilen canavarlar yanar durumda olur",
+
+    "stat.apothic_spawners.echoing": "Yankılanma",
+    "stat.apothic_spawners.echoing.desc": "Üretilen canavarlar ekstra ganimet düşürür, seviyeye bağlı olarak artar",
+	
+    "title.apothic_spawners.spawner": "Canavar Çağırıcı Modifikasyonu",
+    "info.apothic_spawners.spawner": "Canavar Çağırıcıları çeşitli eşyalarla değiştirilebilir, %s kullanılarak toplanabilir.",
+    "info.apothic_spawners.spawner.no_silk": "Canavar Çağırıcıları çeşitli eşyalarla değiştirilebilir, ancak şu anda İpeksi Dokunuş ile toplama devre dışı.",
+    "info.apothic_spawners.spawner.always_drop": "Canavar Çağırıcıları çeşitli eşyalarla değiştirilebilir, kırıldığında her zaman düşer.",
+    "info.apothic_spawners.capturing": "Yakalama büyüsü, canavarlara çağırma yumurtalarını düşürme şansı verir.\\n \\nDüşme Oranı: Seviye başına %s%%",
+	
+    "config.jade.plugin_apothic_spawners.spawner": "Apothic Canavar Çağırıcıları",
+
+    "advancements.apothic_spawners.spawner.root": "apothic_spawners Canavar Çağırıcıları",
+    "advancements.apothic_spawners.spawner.root.desc": "Canavar Çağırıcıları toplanabilir ve değiştirilebilir, bilgi için JEI'ye bak.",
+    "advancements.apothic_spawners.spawner": "Apothic Canavar Çağırıcıları",
+    "advancements.apothic_spawners.spawner.desc": "Bir canavar çağırıcıyı İpeksi Dokunuş ile topla.",
+    "advancements.apothic_spawners.capturing": "Yakalandı!",
+    "advancements.apothic_spawners.capturing.desc": "Yakalama büyüsünü kullanarak bir yaratığın çağırma yumurtasını elde et.",
+    "advancements.apothic_spawners.modifier": "Birkaç Küçük Ayar...",
+    "advancements.apothic_spawners.modifier.desc": "Bir canavar çağırıcının istatistiklerini değiştirmek için bir canavar çağırıcı modifikasyonu kullan.",
+    "advancements.apothic_spawners.spawncount": "Canavar Çağırıcısının Boyutuna Bak!",
+    "advancements.apothic_spawners.spawncount.desc": "Bir canavar çağırıcının doğma sayısını 16'ya yükselt.",
+    "advancements.apothic_spawners.maxdelay": "Zamanı Büken Canavar Çağırıcı",
+    "advancements.apothic_spawners.maxdelay.desc": "Bir canavar çağırıcının en fazla doğma gecikmesini 20'ye düşür.",
+    "advancements.apothic_spawners.mindelay": "Ben Hızlıyım",
+    "advancements.apothic_spawners.mindelay.desc": "Bir canavar çağırıcının en düşük doğma gecikmesini 20'ye düşür.",
+    "advancements.apothic_spawners.nearbyents": "Bir Sürü Yaratık Oluşturmak",
+    "advancements.apothic_spawners.nearbyents.desc": "Bir canavar çağırıcının en fazla yakındaki varlık sayısını 32'ye yükselt.",
+    "advancements.apothic_spawners.playerrange": "Savaştan Uzak",
+    "advancements.apothic_spawners.playerrange.desc": "Bir canavar çağırıcının oyuncu etkinleştirme menzilini 48'e yükselt.",
+    "advancements.apothic_spawners.spawnrange": "Kilometrelerce Yaratık",
+    "advancements.apothic_spawners.spawnrange.desc": "Bir canavar çağırıcının doğma menzilini 32'ye yükselt.",
+    "advancements.apothic_spawners.conditions": "Denetimsiz Doğma",
+    "advancements.apothic_spawners.conditions.desc": "Bir canavar çağırıcının için doğma koşullarını devre dışı bırak.",
+    "advancements.apothic_spawners.players": "Fabrika Hazır",
+    "advancements.apothic_spawners.players.desc": "Bir canavar çağırıcı için yakın oyuncu gereksinimini devre dışı bırak.",
+    "advancements.apothic_spawners.redstone": "Bir Anahtar Eklemek",
+    "advancements.apothic_spawners.redstone.desc": "Bir canavar çağırıcı için redstone kontrolünü etkinleştir.",
+    "advancements.apothic_spawners.light": "Karanlığa Kim İhtiyaç Duyar?",
+    "advancements.apothic_spawners.light.desc": "Canavar Çağırıcının herhangi bir ışık seviyesinde çalışmasını sağlay.",
+    "advancements.apothic_spawners.noai": "Beyin Sisi",
+    "advancements.apothic_spawners.noai.desc": "Bir canavar çağırıcı için Yaratık YZ'sını devre dışı bırak.",
+    "advancements.apothic_spawners.ultimate_spawner": "Nihai Canavar Çağırıcı",
+    "advancements.apothic_spawners.ultimate_spawner.desc": "Redstone kontrolü, YZ devre dışı, doğma koşullarını ve oyuncuları görmezden gelen, en düşük gecikmeye sahip bir canavar çağırıcı oluştur.",
+
+    "enchantment.level.0": "0",
+
+    "emi.category.apothic_spawners.spawner": "Canavar Çağırıcı Modifikasyonu"
+}
