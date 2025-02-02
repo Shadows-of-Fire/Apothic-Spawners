@@ -1,3 +1,12 @@
+## 1.2.1
+* RuyaSavascisi: Added Turkish translation.
+* Fixed the "Captured!" advancement being granted when picking up any item.
+* Fixed spawner modifiers which *do* consume the offhand item showing that it was not consumed.
+* Added a `mode` field to `StatModifier`. The field has two options: `add` (the default) and `set`.
+  * Using `"mode": "set"` allows creating stat modifiers that apply specific presets, instead of adjusting stats relative to the current value.
+* When using the "Spawners Drop Empty" mode, broken spawners will now have their spawn delay reset.
+  * This should reduce the chance that two empty spawners are unstackable.
+
 ## 1.2.0
 * Fixed all advancments not loading.
   * These files were left in the old file path `/advancements` (plural) after the 1.20 migration, which caused them to not load.
