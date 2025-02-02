@@ -65,7 +65,9 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpawnerModifier recipe, IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 11, 11).addIngredients(recipe.getMainhandInput());
-        if (recipe.getOffhandInput() != Ingredient.EMPTY) builder.addSlot(RecipeIngredientRole.INPUT, 11, 48).addIngredients(recipe.getOffhandInput());
+        if (recipe.getOffhandInput() != Ingredient.EMPTY) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 11, 48).addIngredients(recipe.getOffhandInput());
+        }
         builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.SPAWNER));
         builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.SPAWNER));
     }
@@ -91,8 +93,12 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
         }
         else if (mouseX >= -1 && mouseX < 9 && mouseY >= 50 && mouseY < 50 + 12 && recipe.getOffhandInput() != Ingredient.EMPTY) {
             gfx.blit(TEXTURES, -1, 50, 0, 0, 75, 10, 12, 256, 256);
-            gfx.renderComponentTooltip(font, Arrays.asList(ApothicSpawners.lang("misc", "offhand"), ApothicSpawners.lang("misc", "not_consumed").withStyle(ChatFormatting.GRAY)), (int) mouseX,
-                (int) mouseY);
+            List<Component> text = new ArrayList<>();
+            text.add(ApothicSpawners.lang("misc", "offhand"));
+            if (!recipe.consumesOffhand()) {
+                text.add(ApothicSpawners.lang("misc", "not_consumed").withStyle(ChatFormatting.GRAY));
+            }
+            gfx.renderComponentTooltip(font, text, (int) mouseX, (int) mouseY);
         }
         else if (mouseX >= 33 && mouseX < 33 + 16 && mouseY >= 30 && mouseY < 30 + 16) {
             gfx.renderComponentTooltip(font, Arrays.asList(ApothicSpawners.lang("misc", "rclick_spawner")), (int) mouseX, (int) mouseY);
