@@ -114,10 +114,28 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
         int left = 168;
         for (StatModifier<?> s : recipe.getStatModifiers()) {
             String value = s.getFormattedValue();
-            if ("true".equals(value)) value = "+";
-            else if ("false".equals(value)) value = "-";
-            else if (s.value() instanceof Number num && num.intValue() > 0) value = "+" + value;
-            Component msg = ApothicSpawners.lang("misc", "concat", value, s.stat().name());
+            Component msg = switch (s.mode()) {
+                case ADD -> {
+                    if ("true".equals(value)) value = "+";
+                    else if ("false".equals(value)) value = "-";
+                    else if (s.value() instanceof Number num && num.intValue() > 0) value = "+" + value;
+                    yield ApothicSpawners.lang("misc", "concat", value, s.stat().name());
+                }
+                case SET -> {
+                    if (s.value() instanceof Number) {
+                        yield ApothicSpawners.lang("misc", "value_concat", s.stat().name(), value);
+                    }
+                    else {
+                        if ("true".equals(value)) {
+                            yield ApothicSpawners.lang("misc", "on", s.stat().name());
+                        }
+                        else {
+                            yield ApothicSpawners.lang("misc", "off", s.stat().name());
+                        }
+                    }
+                }
+            };
+
             int width = font.width(msg);
             boolean hover = mouseX >= left - width && mouseX < left && mouseY >= top && mouseY < top + font.lineHeight + 1;
             gfx.drawString(font, msg, left - font.width(msg), top, hover ? 0x8080FF : 0x333333, false);
@@ -129,7 +147,7 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
                 List<Component> list = new ArrayList<>();
                 list.add(s.stat().name().withStyle(ChatFormatting.GREEN, ChatFormatting.UNDERLINE));
                 list.add(s.stat().desc().withStyle(ChatFormatting.GRAY));
-                if (s.value() instanceof Number) {
+                if (s.value() instanceof Number && s.mode() == StatModifier.Mode.ADD) {
                     StatModifier<Number> n = (StatModifier<Number>) s;
                     if (s.min().isPresent() || s.max().isPresent()) list.add(Component.literal(" "));
                     if (s.min().isPresent()) list.add(ApothicSpawners.lang("misc", "min_value", n.stat().formatValue(n.min().get())).withStyle(ChatFormatting.GRAY));

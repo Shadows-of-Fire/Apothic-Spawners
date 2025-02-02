@@ -16,6 +16,8 @@
     "misc.apothic_spawners.shift_stats": "Hold Shift for Stats",
     "misc.apothic_spawners.ctrl_stats": "Hold Ctrl for Stats",
     "misc.apothic_spawners.banned": "Cannot be used on a Spawner",
+    "misc.apothic_spawners.on": "%s: On",
+    "misc.apothic_spawners.off": "%s: Off",
     
     "stat.apothic_spawners.min_delay": "Min Spawn Delay",
     "stat.apothic_spawners.min_delay.desc": "The minimum number of ticks between spawns",
