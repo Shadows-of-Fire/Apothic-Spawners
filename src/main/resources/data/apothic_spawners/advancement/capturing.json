@@ -17,7 +17,9 @@
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [{
-                    "type": "apothic_spawners:spawn_egg"
+                    "predicates": {
+                        "apothic_spawners:spawn_egg": {}
+                    }
                 }]
             }
         }
