@@ -97,6 +97,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
                 if (ASConfig.spawnersDropEmpty) {
                     spawner.getSpawner().spawnPotentials = SimpleWeightedRandomList.empty();
                     spawner.getSpawner().nextSpawnData = null;
+                    spawner.getSpawner().spawnDelay = 0;
                 }
                 te.saveToItem(s, params.getLevel().registryAccess());
             }
