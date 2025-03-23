@@ -47,6 +47,11 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
 
     protected final Map<SpawnerStat<?>, Object> customStats = new IdentityHashMap<>();
 
+    /**
+     * Flag to determine if the spawner has been silk-touched or modified by a player.
+     */
+    boolean hasBeenModified = false;
+
     public ApothSpawnerTile(BlockPos pos, BlockState state) {
         super(pos, state);
         this.spawner = new SpawnerLogicExt();
@@ -66,6 +71,7 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
             }
         });
         tag.put("stats", stats);
+        tag.putBoolean("modified", this.hasBeenModified);
         super.saveAdditional(tag, registries);
     }
 
@@ -85,11 +91,19 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
                 }
             }
         }
+
+        if (tag.contains("modified")) {
+            this.hasBeenModified = tag.getBoolean("modified");
+        }
         super.loadAdditional(tag, registries);
     }
 
     public Map<SpawnerStat<?>, Object> getStatsMap() {
         return this.customStats;
+    }
+
+    public boolean hasBeenModified() {
+        return this.hasBeenModified;
     }
 
     public class SpawnerLogicExt extends BaseSpawner {

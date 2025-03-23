@@ -94,6 +94,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
             ItemStack s = new ItemStack(this);
             BlockEntity te = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
             if (te instanceof ApothSpawnerTile spawner) {
+                spawner.hasBeenModified = true;
                 if (ASConfig.spawnersDropEmpty) {
                     spawner.getSpawner().spawnPotentials = SimpleWeightedRandomList.empty();
                     spawner.getSpawner().nextSpawnData = null;
@@ -127,6 +128,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
 
                 ASObjects.MODIFIER_TRIGGER.get().trigger((ServerPlayer) player, tile, match);
                 world.sendBlockUpdated(pos, state, state, 3);
+                tile.hasBeenModified = true;
                 return ItemInteractionResult.SUCCESS;
             }
         }
