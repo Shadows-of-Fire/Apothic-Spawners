@@ -24,11 +24,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityTeleportEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.living.LivingExperienceDropEvent;
 import net.neoforged.neoforge.event.entity.living.MobDespawnEvent;
 import net.neoforged.neoforge.event.entity.living.MobSplitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -79,6 +81,14 @@ public class ASEvents {
                 dropFromLootTable.invoke(e.getEntity(), e.getSource(), true);
             }
             e.getDrops().addAll(e.getEntity().captureDrops(null));
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public void handleEchoingXp(LivingExperienceDropEvent e) {
+        int echoes = e.getEntity().getPersistentData().getInt(SpawnerStats.ECHOING.getId().toString());
+        if (echoes > 0) {
+            e.setDroppedExperience(e.getDroppedExperience() * (1 + echoes));
         }
     }
 
