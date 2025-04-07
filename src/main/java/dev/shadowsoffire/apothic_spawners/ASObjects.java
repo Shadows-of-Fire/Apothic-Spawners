@@ -10,7 +10,9 @@ import dev.shadowsoffire.placebo.registry.DeferredHelper;
 import net.minecraft.advancements.critereon.ItemSubPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 
@@ -25,6 +27,8 @@ public class ASObjects {
     public static final DataComponentType<Unit> CAPTURING = HELPER.enchantmentEffect("capturing", builder -> builder.persistent(Unit.CODEC));
 
     public static final Supplier<ModifierTrigger> MODIFIER_TRIGGER = HELPER.custom("spawner_modifier", Registries.TRIGGER_TYPE, ModifierTrigger::new);
+
+    public static final TagKey<EntityType<?>> BLACKLISTED_FROM_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, ApothicSpawners.loc("blacklisted_from_spawners"));
 
     static {
         HELPER.custom("spawn_egg", Registries.ITEM_SUB_PREDICATE_TYPE, () -> new ItemSubPredicate.Type<>(SpawnEggItemPredicate.CODEC));

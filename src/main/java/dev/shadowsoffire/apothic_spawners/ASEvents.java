@@ -59,7 +59,7 @@ public class ASEvents {
 
         if (killer instanceof LivingEntity living) {
             Pair<Unit, Integer> level = EnchantmentHelper.getHighestLevel(living.getWeaponItem(), ASObjects.CAPTURING);
-            if (level == null || ASConfig.bannedMobs.contains(EntityType.getKey(killed.getType()))) {
+            if (level == null || killed.getType().is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
                 return;
             }
 
@@ -98,7 +98,9 @@ public class ASEvents {
             ItemStack s = e.getItemStack();
             if (s.getItem() instanceof SpawnEggItem egg) {
                 EntityType<?> type = egg.getType(s);
-                if (ASConfig.bannedMobs.contains(EntityType.getKey(type))) e.setCanceled(true);
+                if (type.is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
+                    e.setCanceled(true);
+                }
             }
         }
     }
@@ -108,7 +110,9 @@ public class ASEvents {
         ItemStack s = e.getItemStack();
         if (s.getItem() instanceof SpawnEggItem egg) {
             EntityType<?> type = egg.getType(s);
-            if (ASConfig.bannedMobs.contains(EntityType.getKey(type))) e.getToolTip().add(ApothicSpawners.lang("misc", "banned").withStyle(ChatFormatting.GRAY));
+            if (type.is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
+                e.getToolTip().add(ApothicSpawners.lang("misc", "banned").withStyle(ChatFormatting.GRAY));
+            }
         }
     }
 
