@@ -26,12 +26,12 @@ public class ASObjects {
 
     public static final DataComponentType<Unit> CAPTURING = HELPER.enchantmentEffect("capturing", builder -> builder.persistent(Unit.CODEC));
 
-    public static final Supplier<ModifierTrigger> MODIFIER_TRIGGER = HELPER.custom("spawner_modifier", Registries.TRIGGER_TYPE, ModifierTrigger::new);
+    public static final ModifierTrigger MODIFIER_TRIGGER = HELPER.custom("spawner_modifier", Registries.TRIGGER_TYPE, new ModifierTrigger());
 
     public static final TagKey<EntityType<?>> BLACKLISTED_FROM_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, ApothicSpawners.loc("blacklisted_from_spawners"));
 
     static {
-        HELPER.custom("spawn_egg", Registries.ITEM_SUB_PREDICATE_TYPE, () -> new ItemSubPredicate.Type<>(SpawnEggItemPredicate.CODEC));
+        HELPER.custom("spawn_egg", Registries.ITEM_SUB_PREDICATE_TYPE, new ItemSubPredicate.Type<>(SpawnEggItemPredicate.CODEC));
     }
 
     public static void bootstrap(IEventBus bus) {

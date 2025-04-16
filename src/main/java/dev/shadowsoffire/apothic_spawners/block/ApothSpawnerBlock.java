@@ -126,7 +126,7 @@ public class ApothSpawnerBlock extends SpawnerBlock {
                     }
                 }
 
-                ASObjects.MODIFIER_TRIGGER.get().trigger((ServerPlayer) player, tile, match);
+                ASObjects.MODIFIER_TRIGGER.trigger((ServerPlayer) player, tile, match);
                 world.sendBlockUpdated(pos, state, state, 3);
                 tile.hasBeenModified = true;
                 return ItemInteractionResult.SUCCESS;
