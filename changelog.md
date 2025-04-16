@@ -1,3 +1,12 @@
+## 1.3.0
+* Added a way to track if spawners have been modified by a player.
+  * Breaking a mob spawner with silk touch also counts as a modification.
+* Reduced the default max level of Echoing to 3 (was 5).
+* Made Echoing apply to mob experience as well as drops.
+* Moved the spawner blacklist from the config file to the entity type tag `apothic_spawners:blacklisted_from_spawners`.
+  * Modpacks relying on the config option will need to migrate to adding blacklisted entities to the tag.
+* ZHAY10086: Added Chinese Translation.
+
 ## 1.2.1
 * RuyaSavascisi: Added Turkish translation.
 * Fixed the "Captured!" advancement being granted when picking up any item.
