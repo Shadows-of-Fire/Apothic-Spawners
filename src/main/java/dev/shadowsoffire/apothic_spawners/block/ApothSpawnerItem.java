@@ -41,7 +41,7 @@ public class ApothSpawnerItem extends BlockItem {
                         case AMBIENT, CREATURE -> ChatFormatting.DARK_GREEN;
                         case MONSTER -> ChatFormatting.RED;
                         case WATER_AMBIENT, UNDERGROUND_WATER_CREATURE, WATER_CREATURE, AXOLOTLS -> ChatFormatting.BLUE;
-                        case MISC -> ChatFormatting.WHITE;
+                        default -> ChatFormatting.WHITE;
                     };
                     return ApothicSpawners.lang("item", "spawner", Component.translatable(t.getDescriptionId())).withStyle(color);
                 }
