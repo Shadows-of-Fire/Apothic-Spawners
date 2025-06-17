@@ -264,4 +264,14 @@ public class LyingLevel implements ServerLevelAccessor {
         this.wrapped.gameEvent(gameEvent, pos, context);
     }
 
+    @Override
+    public float getLightLevelDependentMagicValue(BlockPos pos) {
+        return fakeLightLevel / 15.0F;
+    }
+
+    @Override
+    public float getPathfindingCostFromLightLevels(BlockPos pos) {
+        return fakeLightLevel / 15.0F - 0.5F;
+    }
+
 }
