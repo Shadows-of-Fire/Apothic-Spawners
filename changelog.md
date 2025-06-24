@@ -1,3 +1,7 @@
+## 1.3.1
+* Bagel: Fixed an issue where the "Ignores Light" modifier didn't work in dimensions with ambient light.
+* Fixed an issue where spawners containing a mob with a non-default `MobCategory` would cause the name to not display.
+
 ## 1.3.0
 * Added a way to track if spawners have been modified by a player.
   * Breaking a mob spawner with silk touch also counts as a modification.
