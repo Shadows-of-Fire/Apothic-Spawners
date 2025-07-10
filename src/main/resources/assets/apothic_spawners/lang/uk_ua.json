@@ -1,0 +1,114 @@
+{
+    "item.apothic_spawners.spawner": "Спавнер %s",
+
+    "enchantment.apothic_spawners.capturing": "Захоплення",
+    "enchantment.apothic_spawners.capturing.desc": "Додає шанс, що моби дропнуть своє яйце виклику.",
+
+    "misc.apothic_spawners.concat": "%s %s",
+    "misc.apothic_spawners.value_concat": "%s: %s",
+    "misc.apothic_spawners.min_value": "Мін. значення: %s",
+    "misc.apothic_spawners.max_value": "Макс. значення: %s",
+    "misc.apothic_spawners.mainhand": "У головній руці",
+    "misc.apothic_spawners.offhand": "У другій руці",
+    "misc.apothic_spawners.not_consumed": "Цей предмет не витрачається",
+    "misc.apothic_spawners.rclick_spawner": "Клацніть ПКМ по спавнеру",
+    "misc.apothic_spawners.entity": "Сутність",
+    "misc.apothic_spawners.shift_stats": "Утримуйте Shift для статистики",
+    "misc.apothic_spawners.ctrl_stats": "Утримуйте Ctrl для статистики",
+    "misc.apothic_spawners.banned": "Не можна використати на спавнері",
+    "misc.apothic_spawners.on": "%s: Увімкнено",
+    "misc.apothic_spawners.off": "%s: Вимкнено",
+    
+    "stat.apothic_spawners.min_delay": "Мін. затримка спавну",
+    "stat.apothic_spawners.min_delay.desc": "Мінімальна кількість тіків між спавнами",
+    
+    "stat.apothic_spawners.max_delay": "Макс. затримка спавну",
+    "stat.apothic_spawners.max_delay.desc": "Максимальна кількість тіків між спавнами",
+    
+    "stat.apothic_spawners.spawn_count": "Кількість спавну",
+    "stat.apothic_spawners.spawn_count.desc": "Кількість сутностей, які з'являються одночасно",
+    
+    "stat.apothic_spawners.max_nearby_entities": "Макс. істот поруч",
+    "stat.apothic_spawners.max_nearby_entities.desc": "Загальна кількість істот, дозволених поруч",
+    
+    "stat.apothic_spawners.req_player_range": "Діапазон активації",
+    "stat.apothic_spawners.req_player_range.desc": "На якій відстані гравець може бути, щоб спавнер працював",
+    
+    "stat.apothic_spawners.spawn_range": "Діапазон спавну",
+    "stat.apothic_spawners.spawn_range.desc": "Радіус (у блоках), в якому можуть з'являтися моби",
+    
+    "stat.apothic_spawners.ignore_players": "Ігнорує гравців",
+    "stat.apothic_spawners.ignore_players.desc": "Спавнеру не потрібен гравець поруч",
+    
+    "stat.apothic_spawners.ignore_conditions": "Ігнорує умови",
+    "stat.apothic_spawners.ignore_conditions.desc": "Спавнер ігнорує умови спавну",
+    
+    "stat.apothic_spawners.redstone_control": "Керування редстоуном",
+    "stat.apothic_spawners.redstone_control.desc": "Для активації спавнеру потрібен сигнал редстоуну",
+    
+    "stat.apothic_spawners.ignore_light": "Ігнорує освітлення",
+    "stat.apothic_spawners.ignore_light.desc": "Спавнер ігнорує рівень освітлення",
+    
+    "stat.apothic_spawners.no_ai": "Без ШІ",
+    "stat.apothic_spawners.no_ai.desc": "Заспавнені істоти не матимуть ШІ",
+    
+	"stat.apothic_spawners.silent": "Беззвучний",
+	"stat.apothic_spawners.silent.desc": "Заспавнені істоти не видаватимуть звуків",
+    
+	"stat.apothic_spawners.youthful": "Молодість",
+	"stat.apothic_spawners.youthful.desc": "Спавнер завжди буде спавнити дитинчат, якщо це можливо",
+
+	"stat.apothic_spawners.initial_health": "Початкове здоров'я",
+	"stat.apothic_spawners.initial_health.desc": "Відсоток початкового здоров'я заспавнених мобів",
+
+	"stat.apothic_spawners.burning": "Палаючі",
+	"stat.apothic_spawners.burning.desc": "Заспавнені моби будуть підпалені",
+
+	"stat.apothic_spawners.echoing": "Відлуння",
+	"stat.apothic_spawners.echoing.desc": "Заспавнені моби даватимуть додаткову здобич, що зростає з рівнем",
+
+    "title.apothic_spawners.spawner": "Модифікація спавнера",
+    "info.apothic_spawners.spawner": "Спавнери можна модифікувати різними предметами та збирати за допомогою %s.",
+    "info.apothic_spawners.spawner.no_silk": "Спавнери можна модифікувати різними предметами, але збір шовковим дотиком наразі вимкнено.",
+    "info.apothic_spawners.spawner.always_drop": "Спавнери можна модифікувати різними предметами, і вони завжди випадатимуть при зламі.",
+    "info.apothic_spawners.capturing": "Зачарування «Захоплення» дає мобам шанс дропнути своє яйце виклику.\\n \\nШанс дропу: %s%% за рівень",
+
+    "config.jade.plugin_apothic_spawners.spawner": "Апотичні спавнери",
+
+    "advancements.apothic_spawners.spawner.root": "Апотичні спавнери",
+    "advancements.apothic_spawners.spawner.root.desc": "Спавнери можна збирати та модифікувати, дивіться JEI для деталей.",
+    "advancements.apothic_spawners.spawner": "Апотичні спавнери",
+    "advancements.apothic_spawners.spawner.desc": "Зберіть спавнер мобів за допомогою шовкового дотику.",
+    "advancements.apothic_spawners.capturing": "Захоплено!",
+    "advancements.apothic_spawners.capturing.desc": "Отримайте яйце виклику з моба, використовуючи зачарування «Захоплення»",
+    "advancements.apothic_spawners.modifier": "Трохи налаштувань...",
+    "advancements.apothic_spawners.modifier.desc": "Використайте модифікатор спавнера, щоб змінити його характеристики.",
+    "advancements.apothic_spawners.spawncount": "Поглянь на розмір його спавнера!",
+    "advancements.apothic_spawners.spawncount.desc": "Збільшіть кількість спавну спавнера до 16",
+    "advancements.apothic_spawners.maxdelay": "Спотворений часом спавнер",
+    "advancements.apothic_spawners.maxdelay.desc": "Зменшіть максимальну затримку спавну до 20",
+    "advancements.apothic_spawners.mindelay": "Я — швидкість",
+    "advancements.apothic_spawners.mindelay.desc": "Зменшіть мінімальну затримку спавну до 20",
+    "advancements.apothic_spawners.nearbyents": "Створення орди",
+    "advancements.apothic_spawners.nearbyents.desc": "Збільшіть максимальну кількість істот поруч до 32",
+    "advancements.apothic_spawners.playerrange": "Далеко від бою",
+    "advancements.apothic_spawners.playerrange.desc": "Збільшіть діапазон активації спавнера до 48",
+    "advancements.apothic_spawners.spawnrange": "Моби на милі навколо",
+    "advancements.apothic_spawners.spawnrange.desc": "Збільшіть діапазон спавну спавнера до 32",
+    "advancements.apothic_spawners.conditions": "Без обмежень спавну",
+    "advancements.apothic_spawners.conditions.desc": "Вимкніть умови спавну для спавнера",
+    "advancements.apothic_spawners.players": "Готовий до фабрики",
+    "advancements.apothic_spawners.players.desc": "Вимкніть потребу в гравцях поруч для спавнера",
+    "advancements.apothic_spawners.redstone": "Додаємо перемикач",
+    "advancements.apothic_spawners.redstone.desc": "Увімкніть керування редстоуном для спавнера",
+    "advancements.apothic_spawners.light": "Навіщо темрява?",
+    "advancements.apothic_spawners.light.desc": "Зробіть так, щоб ваш спавнер працював при будь-якому рівні освітлення.",
+    "advancements.apothic_spawners.noai": "Відкачка мізків",
+    "advancements.apothic_spawners.noai.desc": "Вимкніть ШІ мобів для спавнера.",
+    "advancements.apothic_spawners.ultimate_spawner": "Абсолютний спавнер",
+    "advancements.apothic_spawners.ultimate_spawner.desc": "Створіть спавнер з мінімальними затримками, керуванням редстоуном, без ШІ, що ігнорує умови спавну та гравців.",
+
+    "enchantment.level.0": "0",
+
+    "emi.category.apothic_spawners.spawner": "Модифікація спавнера"
+}
