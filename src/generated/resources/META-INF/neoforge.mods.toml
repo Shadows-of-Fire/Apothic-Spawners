@@ -29,13 +29,13 @@ config="apothic_spawners.mixins.json"
 [[dependencies.apothic_spawners]]
     modId="neoforge"
     type="required"
-    versionRange="[21.1.144,)"
+    versionRange="[21.1.187,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.apothic_spawners]]
     modId="placebo"
     type="required"
-    versionRange="[9.7.0,)"
+    versionRange="[9.9.0,)"
     ordering="NONE"
     side="BOTH"
