@@ -67,7 +67,7 @@
 	"stat.apothic_spawners.echoing": "Ecoante",
 	"stat.apothic_spawners.echoing.desc": "As criaturas geradas droparão saques extras, aumentando com o nível",
 
-    "title.apothic_spawners.spawner": "Spawner Modification",
+    "title.apothic_spawners.spawner": "Modificação de Gerador",
     "info.apothic_spawners.spawner": "Os geradores podem ser modificados com vários itens e podem ser coletados com %s.",
     "info.apothic_spawners.spawner.no_silk": "Os geradores podem ser modificados com vários itens, mas a coleta com Toque Suave está desativada no momento.",
     "info.apothic_spawners.spawner.always_drop": "Os geradores podem ser modificados com vários itens e sempre cairão quando quebrados.",
@@ -110,5 +110,5 @@
 
     "enchantment.level.0": "0",
 
-    "emi.category.apothic_spawners.spawner": "Spawner Modification"
+    "emi.category.apothic_spawners.spawner": "Modificação de Gerador"
 }
