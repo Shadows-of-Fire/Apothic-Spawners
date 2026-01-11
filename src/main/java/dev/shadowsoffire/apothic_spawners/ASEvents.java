@@ -13,6 +13,7 @@ import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.events.ResourceReloadEvent;
 import net.minecraft.ChatFormatting;
 import net.minecraft.util.Unit;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -41,6 +42,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 public class ASEvents {
 
     private static final MethodHandle dropFromLootTable;
+    private static final MethodHandle shouldDespawnInPeaceful;
     static {
         Method m = ObfuscationReflectionHelper.findMethod(LivingEntity.class, "dropFromLootTable", DamageSource.class, boolean.class);
         try {
@@ -49,6 +51,15 @@ public class ASEvents {
         }
         catch (IllegalAccessException e) {
             throw new RuntimeException("LivingEntity#dropFromLootTable not located!");
+        }
+
+        m = ObfuscationReflectionHelper.findMethod(Mob.class, "shouldDespawnInPeaceful");
+        try {
+            m.setAccessible(true);
+            shouldDespawnInPeaceful = MethodHandles.lookup().unreflect(m);
+        }
+        catch (IllegalAccessException e) {
+            throw new RuntimeException("Mob#shouldDespawnInPeaceful not located!");
         }
     }
 
@@ -162,9 +173,10 @@ public class ASEvents {
     }
 
     @SubscribeEvent
-    public void onDespawn(MobDespawnEvent e) {
+    public void onDespawn(MobDespawnEvent e) throws Throwable {
         Entity ent = e.getEntity();
-        if (ASConfig.entityDespawnDelay >= ent.tickCount) {
+        boolean isPeaceful = e.getLevel().getDifficulty() == Difficulty.PEACEFUL;
+        if (ASConfig.entityDespawnDelay >= ent.tickCount && (!isPeaceful || ent instanceof Mob mob && !(boolean) shouldDespawnInPeaceful.invoke(mob))) {
             e.setResult(MobDespawnEvent.Result.DENY);
         }
     }
