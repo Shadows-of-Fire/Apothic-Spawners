@@ -1,3 +1,7 @@
+## 1.3.3
+* PrincessStellar: Added Brazilian translation.
+* Fixed an issue where hostile mobs would linger in peaceful for a short time.
+
 ## 1.3.2
 * Wajt: Added Ukrainian translation.
 * Updated to Placebo 9.9.0
