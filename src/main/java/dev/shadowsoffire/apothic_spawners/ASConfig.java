@@ -34,7 +34,7 @@ public class ASConfig {
 
         spawnersDropEmpty = config.getBoolean("Spawners Drop Empty", "general", false, "If spawners should clear their contained entity when broken.\nServer-authoritative.");
 
-        entityDespawnDelay = config.getInt("Entity Despawn Delay", "general", 600, 0, 24000, "The time, in ticks, that mobs will be prevented from despawning for after they have spawned.\nServer-authoritative.");
+        entityDespawnDelay = config.getInt("Entity Despawn Delay", "general", 600, 0, 24000, "The time, in ticks, that spawner-spawned mobs will be prevented from despawning for after they have spawned.\nServer-authoritative.");
 
         if (config.hasChanged()) {
             config.save();

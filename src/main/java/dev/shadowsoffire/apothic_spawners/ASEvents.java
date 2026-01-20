@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -174,9 +175,14 @@ public class ASEvents {
 
     @SubscribeEvent
     public void onDespawn(MobDespawnEvent e) throws Throwable {
-        Entity ent = e.getEntity();
+        Mob mob = e.getEntity();
+        // Don't block peaceful despawns
         boolean isPeaceful = e.getLevel().getDifficulty() == Difficulty.PEACEFUL;
-        if (ASConfig.entityDespawnDelay >= ent.tickCount && (!isPeaceful || ent instanceof Mob mob && !(boolean) shouldDespawnInPeaceful.invoke(mob))) {
+        if (isPeaceful && (boolean) shouldDespawnInPeaceful.invoke(mob)) {
+            return;
+        }
+
+        if (MobSpawnType.isSpawner(mob.getSpawnType()) && ASConfig.entityDespawnDelay >= mob.tickCount) {
             e.setResult(MobDespawnEvent.Result.DENY);
         }
     }
