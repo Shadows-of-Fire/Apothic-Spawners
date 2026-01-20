@@ -1,3 +1,8 @@
+## 1.3.4
+* Updated the Entity Despawn Delay feature to only apply to spawner-spawned mobs.
+  * Prior to this change, a side effect of entities staying around for too long could appear as very low natural spawn rates.
+  * This was most pronounced when players were moving around rapidly.
+
 ## 1.3.3
 * PrincessStellar: Added Brazilian translation.
 * Fixed an issue where hostile mobs would linger in peaceful for a short time.
