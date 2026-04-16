@@ -1,0 +1,12 @@
+{
+    "type": "apothic_spawners:spawner_modifier",
+    "mainhand": "minecraft:ghast_tear",
+    "offhand": "minecraft:quartz",
+    "stat_changes": [
+        {
+            "type": "apothic_spawners:max_nearby_entities",
+            "min": 1,
+            "value": -2
+        }
+    ]
+}

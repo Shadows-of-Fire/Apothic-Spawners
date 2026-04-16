@@ -6,7 +6,10 @@ import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public class BooleanStat extends CustomStat<Boolean> {
 
@@ -15,8 +18,13 @@ public class BooleanStat extends CustomStat<Boolean> {
     }
 
     @Override
-    public Codec<Boolean> getValueCodec() {
+    public Codec<Boolean> valueCodec() {
         return Codec.BOOL;
+    }
+
+    @Override
+    public StreamCodec<? super RegistryFriendlyByteBuf, Boolean> valueStreamCodec() {
+        return ByteBufCodecs.BOOL;
     }
 
     @Override

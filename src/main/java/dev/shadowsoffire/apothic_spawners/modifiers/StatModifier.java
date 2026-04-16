@@ -13,8 +13,7 @@ import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStat;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
@@ -28,8 +27,10 @@ import net.minecraft.util.StringRepresentable;
 public record StatModifier<T>(SpawnerStat<T> stat, T value, Optional<T> min, Optional<T> max, Mode mode) {
 
     private static final Map<SpawnerStat<?>, MapCodec<StatModifier<?>>> CODEC_CACHE = new ConcurrentHashMap<>();
+    private static final Map<SpawnerStat<?>, StreamCodec<RegistryFriendlyByteBuf, StatModifier<?>>> STREAM_CODEC_CACHE = new ConcurrentHashMap<>();
 
-    public static final Codec<StatModifier<?>> CODEC = Codec.lazyInitialized(() -> SpawnerStats.REGISTRY.byNameCodec().dispatch(StatModifier::stat, StatModifier::modifierCodec));
+    public static final Codec<StatModifier<?>> CODEC = Codec.lazyInitialized(() -> SpawnerStats.REGISTRY.byNameCodec().<StatModifier<?>>dispatch(StatModifier::stat, StatModifier::modifierCodec));
+    public static final StreamCodec<RegistryFriendlyByteBuf, StatModifier<?>> STREAM_CODEC = ByteBufCodecs.registry(SpawnerStats.REGISTRY_KEY).dispatch(StatModifier::stat, StatModifier::modifierStreamCodec);
 
     public StatModifier(SpawnerStat<T> stat, T value) {
         this(stat, value, Optional.empty(), Optional.empty(), Mode.ADD);
@@ -52,29 +53,34 @@ public record StatModifier<T>(SpawnerStat<T> stat, T value, Optional<T> min, Opt
         return this.stat.formatValue(this.value);
     }
 
-    public void write(FriendlyByteBuf buf) {
-        buf.writeResourceLocation(this.stat.getId());
-        buf.writeNbt(modifierCodec(this.stat).codec().encodeStart(NbtOps.INSTANCE, this).getOrThrow());
-    }
-
-    public static StatModifier<?> read(FriendlyByteBuf buf) {
-        SpawnerStat<?> stat = SpawnerStats.REGISTRY.get(buf.readResourceLocation());
-        return modifierCodec(stat).codec().decode(NbtOps.INSTANCE, buf.readNbt()).getOrThrow().getFirst();
-    }
-
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static <T> MapCodec<StatModifier<T>> modifierCodec(SpawnerStat<T> stat) {
         return (MapCodec) CODEC_CACHE.computeIfAbsent(stat, s -> (MapCodec) createModifierCodec(s));
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public static <T> StreamCodec<RegistryFriendlyByteBuf, StatModifier<T>> modifierStreamCodec(SpawnerStat<T> stat) {
+        return (StreamCodec) STREAM_CODEC_CACHE.computeIfAbsent(stat, s -> (StreamCodec) createModifierStreamCodec(s));
+    }
+
     private static <T> MapCodec<StatModifier<T>> createModifierCodec(SpawnerStat<T> stat) {
         return RecordCodecBuilder.mapCodec(inst -> inst
             .group(
-                stat.getValueCodec().fieldOf("value").forGetter(StatModifier::value),
-                stat.getValueCodec().optionalFieldOf("min").forGetter(StatModifier::min),
-                stat.getValueCodec().optionalFieldOf("max").forGetter(StatModifier::max),
+                stat.valueCodec().fieldOf("value").forGetter(StatModifier::value),
+                stat.valueCodec().optionalFieldOf("min").forGetter(StatModifier::min),
+                stat.valueCodec().optionalFieldOf("max").forGetter(StatModifier::max),
                 Mode.CODEC.optionalFieldOf("mode", Mode.ADD).forGetter(StatModifier::mode))
             .apply(inst, (value, min, max, mode) -> new StatModifier<>(stat, value, min, max, mode)));
+    }
+
+    private static <T> StreamCodec<RegistryFriendlyByteBuf, StatModifier<T>> createModifierStreamCodec(SpawnerStat<T> stat) {
+        // ECJ fails generic inference here, unfortunately...
+        return StreamCodec.<RegistryFriendlyByteBuf, StatModifier<T>, T, Optional<T>, Optional<T>, Mode>composite(
+            stat.valueStreamCodec(), StatModifier::value,
+            ByteBufCodecs.optional(stat.valueStreamCodec()), StatModifier::min,
+            ByteBufCodecs.optional(stat.valueStreamCodec()), StatModifier::max,
+            Mode.STREAM_CODEC, StatModifier::mode,
+            (value, min, max, mode) -> new StatModifier<>(stat, value, min, max, mode));
     }
 
     /**

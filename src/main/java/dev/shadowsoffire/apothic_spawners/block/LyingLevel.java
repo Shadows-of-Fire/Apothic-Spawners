@@ -3,8 +3,9 @@ package dev.shadowsoffire.apothic_spawners.block;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.particles.ParticleOptions;
@@ -95,18 +96,17 @@ public class LyingLevel implements ServerLevelAccessor {
     }
 
     @Override
-    public void playSound(Player pPlayer, BlockPos pPos, SoundEvent pSound, SoundSource pCategory, float pVolume, float pPitch) {
-        this.wrapped.playSound(pPlayer, pPos, pSound, pCategory, pVolume, pPitch);
+    public void playSound(@Nullable Entity pEntity, BlockPos pPos, SoundEvent pSound, SoundSource pCategory, float pVolume, float pPitch) {
+        this.wrapped.playSound(pEntity, pPos, pSound, pCategory, pVolume, pPitch);
     }
 
-    @Override
     public void addParticle(ParticleOptions pParticleData, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed) {
         this.wrapped.addParticle(pParticleData, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
     }
 
     @Override
-    public void levelEvent(Player pPlayer, int pType, BlockPos pPos, int pData) {
-        this.wrapped.levelEvent(pPlayer, pType, pPos, pData);
+    public void levelEvent(@Nullable Entity pEntity, int pType, BlockPos pPos, int pData) {
+        this.wrapped.levelEvent(pEntity, pType, pPos, pData);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class LyingLevel implements ServerLevelAccessor {
 
     @Override
     public boolean isClientSide() {
-        return this.wrapped.isClientSide(); // Should always be false, but whatever
+        return this.wrapped.isClientSide();
     }
 
     @Override
@@ -167,11 +167,6 @@ public class LyingLevel implements ServerLevelAccessor {
     @Override
     public DimensionType dimensionType() {
         return this.wrapped.dimensionType();
-    }
-
-    @Override
-    public float getShade(Direction pDirection, boolean pShade) {
-        return this.wrapped.getShade(pDirection, pShade);
     }
 
     @Override
@@ -250,11 +245,6 @@ public class LyingLevel implements ServerLevelAccessor {
     }
 
     @Override
-    public void blockUpdated(BlockPos pPos, Block pBlock) {
-        this.wrapped.blockUpdated(pPos, pBlock);
-    }
-
-    @Override
     public boolean addFreshEntity(Entity pEntity) {
         return this.wrapped.addFreshEntity(pEntity);
     }
@@ -262,6 +252,11 @@ public class LyingLevel implements ServerLevelAccessor {
     @Override
     public void gameEvent(Holder<GameEvent> gameEvent, Vec3 pos, Context context) {
         this.wrapped.gameEvent(gameEvent, pos, context);
+    }
+
+    @Override
+    public net.minecraft.world.attribute.EnvironmentAttributeReader environmentAttributes() {
+        return this.wrapped.environmentAttributes();
     }
 
     @Override

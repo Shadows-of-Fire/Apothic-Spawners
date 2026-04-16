@@ -1,0 +1,12 @@
+{
+    "type": "apothic_spawners:spawner_modifier",
+    "mainhand": "minecraft:pointed_dripstone",
+    "offhand": "minecraft:quartz",
+    "stat_changes": [
+        {
+            "type": "apothic_spawners:initial_health",
+            "max": 1.0,
+            "value": 0.05
+        }
+    ]
+}

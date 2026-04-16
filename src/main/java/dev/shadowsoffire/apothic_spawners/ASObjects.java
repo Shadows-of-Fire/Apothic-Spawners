@@ -7,12 +7,15 @@ import dev.shadowsoffire.apothic_spawners.advancements.SpawnEggItemPredicate;
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.registry.DeferredHelper;
-import net.minecraft.advancements.critereon.ItemSubPredicate;
+import com.mojang.serialization.Codec;
+
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 
@@ -22,16 +25,18 @@ public class ASObjects {
 
     public static final Supplier<RecipeType<SpawnerModifier>> SPAWNER_MODIFIER = HELPER.recipe("spawner_modifier", () -> new RecipeType<SpawnerModifier>(){});
 
-    public static final Supplier<SpawnerModifier.Serializer> SPAWNER_MODIFIER_SERIALIZER = HELPER.recipeSerializer("spawner_modifier", () -> SpawnerModifier.SERIALIZER);
+    public static final Supplier<RecipeSerializer<SpawnerModifier>> SPAWNER_MODIFIER_SERIALIZER = HELPER.recipeSerializer("spawner_modifier", () -> SpawnerModifier.SERIALIZER);
 
-    public static final DataComponentType<Unit> CAPTURING = HELPER.enchantmentEffect("capturing", builder -> builder.persistent(Unit.CODEC));
+    public static final DataComponentType<Float> CAPTURING = HELPER.enchantmentEffect("capturing", builder -> builder.persistent(Codec.floatRange(0.001F, 1F)));
+
+    public static final ResourceKey<Enchantment> CAPTURING_ENCH = ResourceKey.create(Registries.ENCHANTMENT, ApothicSpawners.loc("capturing"));
 
     public static final ModifierTrigger MODIFIER_TRIGGER = HELPER.custom("spawner_modifier", Registries.TRIGGER_TYPE, new ModifierTrigger());
 
     public static final TagKey<EntityType<?>> BLACKLISTED_FROM_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, ApothicSpawners.loc("blacklisted_from_spawners"));
 
     static {
-        HELPER.custom("spawn_egg", Registries.ITEM_SUB_PREDICATE_TYPE, new ItemSubPredicate.Type<>(SpawnEggItemPredicate.CODEC));
+        HELPER.componentPredicate("spawn_egg", SpawnEggItemPredicate.CODEC.codec());
     }
 
     public static void bootstrap(IEventBus bus) {

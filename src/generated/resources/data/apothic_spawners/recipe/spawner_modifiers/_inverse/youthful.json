@@ -1,0 +1,12 @@
+{
+    "type": "apothic_spawners:spawner_modifier",
+    "mainhand": "minecraft:turtle_egg",
+    "offhand": "minecraft:quartz",
+    "stat_changes": [
+        {
+            "type": "apothic_spawners:youthful",
+            "mode": "set",
+            "value": false
+        }
+    ]
+}

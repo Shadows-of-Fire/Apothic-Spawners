@@ -1,18 +1,23 @@
 package dev.shadowsoffire.apothic_spawners.advancements;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 
-import net.minecraft.advancements.critereon.ItemSubPredicate;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.component.predicates.DataComponentPredicate;
 
-public class SpawnEggItemPredicate implements ItemSubPredicate {
+/**
+ * Custom predicate which attempts to check if an item is a spawn egg or not.
+ * <p>
+ * Since we're relegated to components, this is the best we can do.
+ */
+public class SpawnEggItemPredicate implements DataComponentPredicate {
 
-    public static final Codec<SpawnEggItemPredicate> CODEC = Codec.unit(SpawnEggItemPredicate::new);
+    public static final MapCodec<SpawnEggItemPredicate> CODEC = MapCodec.unit(SpawnEggItemPredicate::new);
 
     @Override
-    public boolean matches(ItemStack t) {
-        return t.getItem() instanceof SpawnEggItem;
+    public boolean matches(DataComponentGetter components) {
+        return components.has(DataComponents.ENTITY_DATA);
     }
 
 }

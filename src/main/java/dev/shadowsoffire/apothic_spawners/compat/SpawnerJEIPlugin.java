@@ -16,12 +16,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
@@ -31,12 +30,7 @@ public class SpawnerJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
-        List<SpawnerModifier> recipes = Minecraft.getInstance().level.getRecipeManager()
-            .getAllRecipesFor(ASObjects.SPAWNER_MODIFIER.get())
-            .stream()
-            .sorted((r1, r2) -> -r1.id().compareNamespaced(r2.id()))
-            .map(RecipeHolder::value)
-            .toList();
+        List<SpawnerModifier> recipes = SpawnerRecipeCache.getRecipes();
 
         reg.addRecipes(SpawnerCategory.TYPE, recipes);
 
@@ -53,16 +47,20 @@ public class SpawnerJEIPlugin implements IModPlugin {
             });
         }
 
-        for (Item i : BuiltInRegistries.ITEM) {
-            if (i instanceof SpawnEggItem) {
-                reg.addIngredientInfo(new ItemStack(i), VanillaTypes.ITEM_STACK, ApothicSpawners.lang("info", "capturing", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(ASConfig.capturingDropChance * 100)));
+        Minecraft.getInstance().level.holder(ASObjects.CAPTURING_ENCH).ifPresent(capturing -> {
+            Float dropChance = capturing.value().effects().get(ASObjects.CAPTURING);
+            if (dropChance == null) dropChance = 0.005F;
+            for (Item i : BuiltInRegistries.ITEM) {
+                if (i instanceof SpawnEggItem) {
+                    reg.addIngredientInfo(new ItemStack(i), VanillaTypes.ITEM_STACK, ApothicSpawners.lang("info", "capturing", ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(dropChance * 100)));
+                }
             }
-        }
+        });
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
-        reg.addRecipeCatalyst(new ItemStack(Blocks.SPAWNER), SpawnerCategory.TYPE);
+        reg.addCraftingStation(SpawnerCategory.TYPE, Blocks.SPAWNER);
     }
 
     @Override
@@ -71,7 +69,7 @@ public class SpawnerJEIPlugin implements IModPlugin {
     }
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public Identifier getPluginUid() {
         return ApothicSpawners.loc("spawner");
     }
 

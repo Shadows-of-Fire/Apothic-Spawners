@@ -18,7 +18,6 @@ public class ASConfig {
 
     public static int spawnerSilkLevel;
     public static int spawnerSilkDamage;
-    public static float capturingDropChance;
     public static boolean spawnersDropEmpty;
     public static int entityDespawnDelay;
 
@@ -30,8 +29,6 @@ public class ASConfig {
 
         spawnerSilkDamage = config.getInt("Spawner Silk Damage", "general", 100, 0, 100000, "The durability damage dealt to an item that silk touches a spawner.\nServer-authoritative.");
 
-        capturingDropChance = config.getFloat("Capturing Drop Chance", "general", 0.005F, 0.001F, 1F, "The per-level drop chance (1 = 100%) of Spawn Eggs when using Capturing.\nSynced.");
-
         spawnersDropEmpty = config.getBoolean("Spawners Drop Empty", "general", false, "If spawners should clear their contained entity when broken.\nServer-authoritative.");
 
         entityDespawnDelay = config.getInt("Entity Despawn Delay", "general", 600, 0, 24000, "The time, in ticks, that spawner-spawned mobs will be prevented from despawning for after they have spawned.\nServer-authoritative.");
@@ -41,17 +38,16 @@ public class ASConfig {
         }
     }
 
-    public static record ConfigPayload(int spawnerSilkLevel, float capturingDropChance) implements CustomPacketPayload {
+    public static record ConfigPayload(int spawnerSilkLevel) implements CustomPacketPayload {
 
         public static final Type<ConfigPayload> TYPE = new Type<>(ApothicSpawners.loc("config"));
 
         public static final StreamCodec<FriendlyByteBuf, ConfigPayload> CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT, ConfigPayload::spawnerSilkLevel,
-            ByteBufCodecs.FLOAT, ConfigPayload::capturingDropChance,
             ConfigPayload::new);
 
         public ConfigPayload() {
-            this(ASConfig.spawnerSilkLevel, ASConfig.capturingDropChance);
+            this(ASConfig.spawnerSilkLevel);
         }
 
         @Override
@@ -72,9 +68,8 @@ public class ASConfig {
             }
 
             @Override
-            public void handle(ConfigPayload msg, IPayloadContext ctx) {
+            public void handleClient(ConfigPayload msg, IPayloadContext ctx) {
                 ASConfig.spawnerSilkLevel = msg.spawnerSilkLevel;
-                ASConfig.capturingDropChance = msg.capturingDropChance;
             }
 
             @Override
@@ -89,7 +84,7 @@ public class ASConfig {
 
             @Override
             public String getVersion() {
-                return "2";
+                return "3";
             }
 
         }

@@ -1,0 +1,12 @@
+{
+    "type": "apothic_spawners:spawner_modifier",
+    "mainhand": "minecraft:sugar",
+    "offhand": "minecraft:quartz",
+    "stat_changes": [
+        {
+            "type": "apothic_spawners:min_delay",
+            "max": 1600,
+            "value": 10
+        }
+    ]
+}

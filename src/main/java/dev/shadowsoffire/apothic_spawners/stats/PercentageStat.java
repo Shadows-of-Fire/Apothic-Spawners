@@ -5,7 +5,10 @@ import java.util.Optional;
 import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class PercentageStat extends CustomStat<Float> {
@@ -15,8 +18,13 @@ public class PercentageStat extends CustomStat<Float> {
     }
 
     @Override
-    public Codec<Float> getValueCodec() {
+    public Codec<Float> valueCodec() {
         return Codec.floatRange(-1, 1);
+    }
+
+    @Override
+    public StreamCodec<? super RegistryFriendlyByteBuf, Float> valueStreamCodec() {
+        return ByteBufCodecs.FLOAT;
     }
 
     @Override

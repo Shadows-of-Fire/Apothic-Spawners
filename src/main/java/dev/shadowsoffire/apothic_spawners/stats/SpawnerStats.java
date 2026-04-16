@@ -11,7 +11,9 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public class SpawnerStats {
 
-    public static final Registry<SpawnerStat<?>> REGISTRY = new RegistryBuilder<SpawnerStat<?>>(ResourceKey.createRegistryKey(ApothicSpawners.loc("spawner_stat"))).create();
+    public static final ResourceKey<Registry<SpawnerStat<?>>> REGISTRY_KEY = ResourceKey.createRegistryKey(ApothicSpawners.loc("spawner_stat"));
+
+    public static final Registry<SpawnerStat<?>> REGISTRY = new RegistryBuilder<SpawnerStat<?>>(REGISTRY_KEY).sync(true).create();
 
     public static final SpawnerStat<Integer> MIN_DELAY = register("min_delay", new VanillaStat(s -> s.spawner.minSpawnDelay, (s, v) -> s.spawner.minSpawnDelay = v));
 

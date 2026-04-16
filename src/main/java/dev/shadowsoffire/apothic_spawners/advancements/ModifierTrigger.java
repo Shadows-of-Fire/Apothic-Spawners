@@ -10,10 +10,10 @@ import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile.SpawnerLogicExt
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStat;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds.Ints;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds.Ints;
+import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 
 public class ModifierTrigger extends SimpleCriterionTrigger<ModifierTrigger.TriggerInstance> {
@@ -27,7 +27,6 @@ public class ModifierTrigger extends SimpleCriterionTrigger<ModifierTrigger.Trig
         this.trigger(player, inst -> inst.test(player, tile, modif));
     }
 
-    // TODO: Fix this, it needs to be able to parse all stats and compare them against the values. Problem is mapping the stats to bounds objects.
     public static record TriggerInstance(Optional<ContextAwarePredicate> player, Ints minDelay, Ints maxDelay, Ints spawnCount, Ints nearbyEnts,
         Ints playerRange, Ints spawnRange, Optional<Boolean> ignorePlayers, Optional<Boolean> ignoreConditions, Optional<Boolean> redstone,
         Optional<Boolean> ignoreLight, Optional<Boolean> noAI, Optional<Boolean> silent, Optional<Boolean> youthful) implements SimpleCriterionTrigger.SimpleInstance {

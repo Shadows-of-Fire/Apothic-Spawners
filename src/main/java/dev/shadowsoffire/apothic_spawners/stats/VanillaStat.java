@@ -7,7 +7,10 @@ import java.util.function.Function;
 import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 /**
  * Base class for implementation of vanilla stats, as they are all shorts backed by individual fields.
@@ -25,8 +28,13 @@ class VanillaStat implements SpawnerStat<Integer> {
     }
 
     @Override
-    public Codec<Integer> getValueCodec() {
+    public Codec<Integer> valueCodec() {
         return SHORT_INT;
+    }
+
+    @Override
+    public StreamCodec<? super RegistryFriendlyByteBuf, Integer> valueStreamCodec() {
+        return ByteBufCodecs.INT;
     }
 
     @Override

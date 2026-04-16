@@ -1,41 +1,36 @@
 package dev.shadowsoffire.apothic_spawners.compat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import com.mojang.blaze3d.vertex.PoseStack;
+import org.joml.Matrix3x2fStack;
 
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.modifiers.SpawnerModifier;
 import dev.shadowsoffire.apothic_spawners.modifiers.StatModifier;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
 public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
 
-    public static final ResourceLocation TEXTURES = ApothicSpawners.loc("textures/gui/spawner_jei.png");
-    public static final ResourceLocation UID = ApothicSpawners.loc("spawner_modifiers");
-    public static final RecipeType<SpawnerModifier> TYPE = RecipeType.create(ApothicSpawners.MODID, "spawner_modifiers", SpawnerModifier.class);
+    public static final Identifier TEXTURES = ApothicSpawners.loc("textures/gui/spawner_jei.png");
+    public static final Identifier UID = ApothicSpawners.loc("spawner_modifiers");
+    public static final IRecipeType<SpawnerModifier> TYPE = IRecipeType.create(ApothicSpawners.MODID, "spawner_modifiers", SpawnerModifier.class);
 
     private IDrawable bg;
     private IDrawable icon;
@@ -48,7 +43,7 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
     }
 
     @Override
-    public RecipeType<SpawnerModifier> getRecipeType() {
+    public IRecipeType<SpawnerModifier> getRecipeType() {
         return TYPE;
     }
 
@@ -58,18 +53,22 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
     }
 
     @Override
-    public IDrawable getBackground() {
-        return this.bg;
+    public int getWidth() {
+        return 169;
+    }
+
+    @Override
+    public int getHeight() {
+        return 75;
     }
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, SpawnerModifier recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 11, 11).addIngredients(recipe.getMainhandInput());
-        if (recipe.getOffhandInput() != Ingredient.EMPTY) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 11, 48).addIngredients(recipe.getOffhandInput());
+        builder.addSlot(RecipeIngredientRole.INPUT, 11, 11).add(recipe.mainHand());
+        if (recipe.offHand().isPresent()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 11, 48).add(recipe.offHand().get());
         }
-        builder.addInvisibleIngredients(RecipeIngredientRole.CATALYST).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.SPAWNER));
-        builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.SPAWNER));
+        builder.addSlot(RecipeIngredientRole.RENDER_ONLY, -1000, -1000).add(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.SPAWNER));
     }
 
     @Override
@@ -79,40 +78,30 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void draw(SpawnerModifier recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics gfx, double mouseX, double mouseY) {
-        if (recipe.getOffhandInput() == Ingredient.EMPTY) {
-            gfx.blit(TEXTURES, 1, 31, 0, 0, 88, 28, 34, 256, 256);
+    public void draw(SpawnerModifier recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor gfx, double mouseX, double mouseY) {
+        this.bg.draw(gfx, 0, 0);
+        if (recipe.offHand().isEmpty()) {
+            gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, 1, 31, 0, 88, 28, 34, 256, 256);
         }
 
-        Screen scn = Minecraft.getInstance().screen;
         Font font = Minecraft.getInstance().font;
-        if (scn == null) return; // We need this to render tooltips, bail if it's not there.
+
         if (mouseX >= -1 && mouseX < 9 && mouseY >= 13 && mouseY < 13 + 12) {
-            gfx.blit(TEXTURES, -1, 13, 0, 0, 75, 10, 12, 256, 256);
-            gfx.renderComponentTooltip(font, Arrays.asList(ApothicSpawners.lang("misc", "mainhand")), (int) mouseX, (int) mouseY);
+            gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, -1, 13, 0, 75, 10, 12, 256, 256);
         }
-        else if (mouseX >= -1 && mouseX < 9 && mouseY >= 50 && mouseY < 50 + 12 && recipe.getOffhandInput() != Ingredient.EMPTY) {
-            gfx.blit(TEXTURES, -1, 50, 0, 0, 75, 10, 12, 256, 256);
-            List<Component> text = new ArrayList<>();
-            text.add(ApothicSpawners.lang("misc", "offhand"));
-            if (!recipe.consumesOffhand()) {
-                text.add(ApothicSpawners.lang("misc", "not_consumed").withStyle(ChatFormatting.GRAY));
-            }
-            gfx.renderComponentTooltip(font, text, (int) mouseX, (int) mouseY);
-        }
-        else if (mouseX >= 33 && mouseX < 33 + 16 && mouseY >= 30 && mouseY < 30 + 16) {
-            gfx.renderComponentTooltip(font, Arrays.asList(ApothicSpawners.lang("misc", "rclick_spawner")), (int) mouseX, (int) mouseY);
+        else if (mouseX >= -1 && mouseX < 9 && mouseY >= 50 && mouseY < 50 + 12 && recipe.offHand().isPresent()) {
+            gfx.blit(RenderPipelines.GUI_TEXTURED, TEXTURES, -1, 50, 0, 75, 10, 12, 256, 256);
         }
 
-        PoseStack mvStack = gfx.pose();
-        mvStack.pushPose();
-        mvStack.translate(0, 0.5, 0);
-        gfx.renderFakeItem(new ItemStack(Items.SPAWNER), 31, 29);
-        mvStack.popPose();
+        Matrix3x2fStack mvStack = gfx.pose();
+        mvStack.pushMatrix();
+        mvStack.translate(0, 0.5f);
+        gfx.fakeItem(new ItemStack(Items.SPAWNER), 31, 29);
+        mvStack.popMatrix();
 
-        int top = 75 / 2 - recipe.getStatModifiers().size() * (font.lineHeight + 2) / 2 + 2;
+        int top = 75 / 2 - recipe.statModifiers().size() * (font.lineHeight + 2) / 2 + 2;
         int left = 168;
-        for (StatModifier<?> s : recipe.getStatModifiers()) {
+        for (StatModifier<?> s : recipe.statModifiers()) {
             String value = s.getFormattedValue();
             Component msg = switch (s.mode()) {
                 case ADD -> {
@@ -138,31 +127,76 @@ public class SpawnerCategory implements IRecipeCategory<SpawnerModifier> {
 
             int width = font.width(msg);
             boolean hover = mouseX >= left - width && mouseX < left && mouseY >= top && mouseY < top + font.lineHeight + 1;
-            gfx.drawString(font, msg, left - font.width(msg), top, hover ? 0x8080FF : 0x333333, false);
-
-            int maxWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
-            maxWidth = maxWidth - (maxWidth - 210) / 2 - 210;
-
-            if (hover) {
-                List<Component> list = new ArrayList<>();
-                list.add(s.stat().name().withStyle(ChatFormatting.GREEN, ChatFormatting.UNDERLINE));
-                list.add(s.stat().desc().withStyle(ChatFormatting.GRAY));
-                if (s.value() instanceof Number && s.mode() == StatModifier.Mode.ADD) {
-                    StatModifier<Number> n = (StatModifier<Number>) s;
-                    if (s.min().isPresent() || s.max().isPresent()) list.add(Component.literal(" "));
-                    if (s.min().isPresent()) list.add(ApothicSpawners.lang("misc", "min_value", n.stat().formatValue(n.min().get())).withStyle(ChatFormatting.GRAY));
-                    if (s.max().isPresent()) list.add(ApothicSpawners.lang("misc", "max_value", n.stat().formatValue(n.max().get())).withStyle(ChatFormatting.GRAY));
-                }
-                renderComponentTooltip(scn, gfx, list, left + 6, (int) mouseY, maxWidth, font);
-            }
-
+            gfx.text(font, msg, left - font.width(msg), top, hover ? 0xFF8080FF : 0xFF333333, false);
             top += font.lineHeight + 2;
         }
     }
 
-    private static void renderComponentTooltip(Screen scn, GuiGraphics gfx, List<Component> list, int x, int y, int maxWidth, Font font) {
-        List<FormattedText> text = list.stream().map(c -> font.getSplitter().splitLines(c, maxWidth, c.getStyle())).flatMap(List::stream).toList();
-        gfx.renderComponentTooltip(font, text, x, y, ItemStack.EMPTY);
+    @Override
+    @SuppressWarnings("unchecked")
+    public void getTooltip(ITooltipBuilder tooltip, SpawnerModifier recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        if (mouseX >= -1 && mouseX < 9 && mouseY >= 13 && mouseY < 13 + 12) {
+            tooltip.add(ApothicSpawners.lang("misc", "mainhand"));
+            return;
+        }
+
+        if (mouseX >= -1 && mouseX < 9 && mouseY >= 50 && mouseY < 50 + 12 && recipe.offHand().isPresent()) {
+            tooltip.add(ApothicSpawners.lang("misc", "offhand"));
+            if (!recipe.consumesOffhand()) {
+                tooltip.add(ApothicSpawners.lang("misc", "not_consumed").withStyle(ChatFormatting.GRAY));
+            }
+            return;
+        }
+
+        if (mouseX >= 33 && mouseX < 33 + 16 && mouseY >= 30 && mouseY < 30 + 16) {
+            tooltip.add(ApothicSpawners.lang("misc", "rclick_spawner"));
+            return;
+        }
+
+        Font font = Minecraft.getInstance().font;
+        int top = 75 / 2 - recipe.statModifiers().size() * (font.lineHeight + 2) / 2 + 2;
+        int left = 168;
+        for (StatModifier<?> s : recipe.statModifiers()) {
+            Component msg = getStatMessage(s);
+            int width = font.width(msg);
+            if (mouseX >= left - width && mouseX < left && mouseY >= top && mouseY < top + font.lineHeight + 1) {
+                tooltip.add(s.stat().name().withStyle(ChatFormatting.GREEN, ChatFormatting.UNDERLINE));
+                tooltip.add(s.stat().desc().withStyle(ChatFormatting.GRAY));
+                if (s.value() instanceof Number && s.mode() == StatModifier.Mode.ADD) {
+                    StatModifier<Number> n = (StatModifier<Number>) s;
+                    if (s.min().isPresent() || s.max().isPresent()) tooltip.add(Component.literal(" "));
+                    if (s.min().isPresent()) tooltip.add(ApothicSpawners.lang("misc", "min_value", n.stat().formatValue(n.min().get())).withStyle(ChatFormatting.GRAY));
+                    if (s.max().isPresent()) tooltip.add(ApothicSpawners.lang("misc", "max_value", n.stat().formatValue(n.max().get())).withStyle(ChatFormatting.GRAY));
+                }
+                return;
+            }
+            top += font.lineHeight + 2;
+        }
+    }
+
+    private static Component getStatMessage(StatModifier<?> s) {
+        String value = s.getFormattedValue();
+        return switch (s.mode()) {
+            case ADD -> {
+                if ("true".equals(value)) value = "+";
+                else if ("false".equals(value)) value = "-";
+                else if (s.value() instanceof Number num && num.intValue() > 0) value = "+" + value;
+                yield ApothicSpawners.lang("misc", "concat", value, s.stat().name());
+            }
+            case SET -> {
+                if (s.value() instanceof Number) {
+                    yield ApothicSpawners.lang("misc", "value_concat", s.stat().name(), value);
+                }
+                else {
+                    if ("true".equals(value)) {
+                        yield ApothicSpawners.lang("misc", "on", s.stat().name());
+                    }
+                    else {
+                        yield ApothicSpawners.lang("misc", "off", s.stat().name());
+                    }
+                }
+            }
+        };
     }
 
 }

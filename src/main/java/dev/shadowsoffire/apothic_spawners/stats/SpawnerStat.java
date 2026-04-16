@@ -7,16 +7,20 @@ import com.mojang.serialization.Codec;
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 
 public interface SpawnerStat<T> {
 
     /**
      * Returns a codec for the value type of this stat.
      */
-    Codec<T> getValueCodec();
+    Codec<T> valueCodec();
+    
+    StreamCodec<? super RegistryFriendlyByteBuf, T> valueStreamCodec();
 
     /**
      * Gets the current value of this stat.
@@ -48,7 +52,7 @@ public interface SpawnerStat<T> {
     /**
      * Returns the ID of this spawner stat. Used to build the lang key, and to identify it in json.
      */
-    default ResourceLocation getId() {
+    default Identifier getId() {
         return SpawnerStats.REGISTRY.getKey(this);
     }
 

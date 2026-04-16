@@ -5,7 +5,10 @@ import java.util.Optional;
 import com.mojang.serialization.Codec;
 
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public class LevelStat extends CustomStat<Integer> {
 
@@ -14,8 +17,13 @@ public class LevelStat extends CustomStat<Integer> {
     }
 
     @Override
-    public Codec<Integer> getValueCodec() {
+    public Codec<Integer> valueCodec() {
         return Codec.INT;
+    }
+
+    @Override
+    public StreamCodec<? super RegistryFriendlyByteBuf, Integer> valueStreamCodec() {
+        return ByteBufCodecs.INT;
     }
 
     @Override
