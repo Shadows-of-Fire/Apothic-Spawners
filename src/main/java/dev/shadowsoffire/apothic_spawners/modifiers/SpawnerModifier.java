@@ -2,6 +2,7 @@ package dev.shadowsoffire.apothic_spawners.modifiers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
@@ -16,12 +17,14 @@ import dev.shadowsoffire.apothic_spawners.compat.SpawnerRecipeCache;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.PlacementInfo;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeBookCategories;
 import net.minecraft.world.item.crafting.RecipeBookCategory;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -131,8 +134,11 @@ public record SpawnerModifier(Ingredient mainHand, Optional<Ingredient> offHand,
 
     @Nullable
     public static SpawnerModifier findMatch(ApothSpawnerTile tile, ItemStack mainhand, ItemStack offhand) {
-        return SpawnerRecipeCache.getRecipes()
-            .stream()
+        Stream<SpawnerModifier> modifiers = SpawnerRecipeCache.getRecipes().stream();
+        if (tile.getLevel() instanceof ServerLevel sl) {
+            modifiers = sl.recipeAccess().recipeMap().byType(ASObjects.SPAWNER_MODIFIER.get()).stream().map(RecipeHolder::value);
+        }
+        return modifiers
             .sorted((r1, r2) -> r1.offHand.isEmpty() ? r2.offHand.isEmpty() ? 0 : 1 : -1)
             .filter(r -> r.matches(tile, mainhand, offhand))
             .findFirst()
