@@ -8,7 +8,7 @@ license="MIT License"
 
 modId="apothic_spawners"
 
-version="2.0.0beta1"
+version="2.0.0beta2"
 
 displayName="Apothic Spawners"
 
@@ -29,13 +29,13 @@ config="apothic_spawners.mixins.json"
 [[dependencies.apothic_spawners]]
     modId="neoforge"
     type="required"
-    versionRange="[26.1.2.7-beta,)"
+    versionRange="[26.1.2.22-beta,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.apothic_spawners]]
     modId="placebo"
     type="required"
-    versionRange="[10.0.0-beta4,)"
+    versionRange="[10.0.0-beta5,)"
     ordering="NONE"
     side="BOTH"

@@ -10,7 +10,7 @@
             "translate": "advancements.apothic_spawners.spawner.desc"
         },
         "frame": "task",
-        "background": "apothic_spawners:textures/advancements/bg/apoth.png"
+        "background": "apothic_spawners:gui/advancements/backgrounds/apoth"
     },
     "criteria": {
         "spawner": {
