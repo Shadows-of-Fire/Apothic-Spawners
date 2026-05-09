@@ -17,6 +17,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.IEventBus;
 
 public class ASObjects {
@@ -34,6 +35,12 @@ public class ASObjects {
     public static final ModifierTrigger MODIFIER_TRIGGER = HELPER.custom("spawner_modifier", Registries.TRIGGER_TYPE, new ModifierTrigger());
 
     public static final TagKey<EntityType<?>> BLACKLISTED_FROM_SPAWNERS = TagKey.create(Registries.ENTITY_TYPE, ApothicSpawners.loc("blacklisted_from_spawners"));
+
+    /**
+     * Loot table rolled when an unstable spawner detonates. Apothic Spawners' default version produces iron chains;
+     * Apotheosis ships a same-path override that swaps in Spawner Chains when both mods are present.
+     */
+    public static final ResourceKey<LootTable> UNSTABLE_SPAWNER_LOOT = ResourceKey.create(Registries.LOOT_TABLE, ApothicSpawners.loc("gameplay/unstable_spawner"));
 
     static {
         HELPER.componentPredicate("spawn_egg", SpawnEggItemPredicate.CODEC.codec());

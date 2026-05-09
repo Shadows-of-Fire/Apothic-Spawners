@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import dev.shadowsoffire.apothic_spawners.ASConfig.ConfigPayload;
 import dev.shadowsoffire.apothic_spawners.block.ApothSpawnerTile;
 import dev.shadowsoffire.apothic_spawners.data.ASEnchantmentProvider;
+import dev.shadowsoffire.apothic_spawners.data.ASLootProvider;
 import dev.shadowsoffire.apothic_spawners.data.ASRecipeProvider;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
 import dev.shadowsoffire.placebo.datagen.DataGenBuilder;
@@ -61,6 +62,7 @@ public class ApothicSpawners {
         DataGenBuilder.create(MODID)
             .registry(Registries.ENCHANTMENT, ASEnchantmentProvider::bootstrap)
             .provider(ASRecipeProvider::new)
+            .provider(ASLootProvider::create)
             .build(event);
     }
 

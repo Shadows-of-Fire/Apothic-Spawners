@@ -36,6 +36,6 @@ config="apothic_spawners.mixins.json"
 [[dependencies.apothic_spawners]]
     modId="placebo"
     type="required"
-    versionRange="[10.0.0-beta5,)"
+    versionRange="[10.0.0-beta8,)"
     ordering="NONE"
     side="BOTH"

@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder.Reference;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.util.random.WeightedList;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.SpawnerBlock;
@@ -140,6 +142,17 @@ public class ApothSpawnerBlock extends SpawnerBlock {
     @Override
     public Item asItem() {
         return Items.SPAWNER;
+    }
+
+    /**
+     * Blowing up an Apothic Spawner instead transitions it to an unstable state.
+     * In the unstable state, the spawner will cause a larger explosion, spawn many of the contained entity, and spawn a loot table.
+     */
+    @Override
+    public void onBlockExploded(BlockState state, ServerLevel level, BlockPos pos, Explosion explosion) {
+        if (level.getBlockEntity(pos) instanceof ApothSpawnerTile tile && !tile.isUnstable()) {
+            tile.beginInstability();
+        }
     }
 
     static void writeBlockEntityData(ItemStack stack, BlockEntity te, HolderLookup.Provider registries) {
