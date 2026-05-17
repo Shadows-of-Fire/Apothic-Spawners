@@ -1,5 +1,6 @@
 package dev.shadowsoffire.apothic_spawners;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ASConfig {
@@ -22,7 +24,8 @@ public class ASConfig {
     public static int entityDespawnDelay;
 
     public static void load() {
-        Configuration config = new Configuration(ApothicSpawners.MODID);
+        File configDir = new File(FMLPaths.CONFIGDIR.get().toFile(), "apotheosis");
+        Configuration config = new Configuration(new File(configDir, ApothicSpawners.MODID + ".cfg"));
         config.setTitle("Apotheosis Spawner Module Configuration");
         spawnerSilkLevel = config.getInt("Spawner Silk Level", "general", 1, -1, 127,
             "The level of silk touch needed to harvest a spawner.  Set to -1 to disable, 0 to always drop.  The enchantment module can increase the max level of silk touch.\nSynced.");
