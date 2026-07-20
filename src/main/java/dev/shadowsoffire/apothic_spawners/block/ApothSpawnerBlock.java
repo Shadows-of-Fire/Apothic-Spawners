@@ -31,6 +31,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
@@ -153,6 +154,17 @@ public class ApothSpawnerBlock extends SpawnerBlock {
     @Override
     public Item asItem() {
         return Items.SPAWNER;
+    }
+
+    /**
+     * Blowing up an Apothic Spawner instead transitions it to an unstable state.
+     * In the unstable state, the spawner will cause a larger explosion, spawn many of the contained entity, and spawn a loot table.
+     */
+    @Override
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        if (level.getBlockEntity(pos) instanceof ApothSpawnerTile tile && !tile.isUnstable()) {
+            tile.beginInstability();
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 
+import dev.shadowsoffire.apothic_spawners.ASObjects;
 import dev.shadowsoffire.apothic_spawners.ApothicSpawners;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStat;
 import dev.shadowsoffire.apothic_spawners.stats.SpawnerStats;
@@ -29,6 +30,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
@@ -39,11 +42,21 @@ import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.MobSpawnEvent.PositionCheck;
 
 public class ApothSpawnerTile extends SpawnerBlockEntity {
+
+    private static final int INSTABILITY_DURATION_TICKS = 60;
+    private static final float INSTABILITY_RADIUS = 8.0F;
+    private static final int UNSTABLE_MOB_COUNT = 12;
+    private static final double LOOT_SCATTER_RADIUS = 2.0;
 
     protected final Map<SpawnerStat<?>, Object> customStats = new IdentityHashMap<>();
 
@@ -51,6 +64,19 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
      * Flag to determine if the spawner has been silk-touched or modified by a player.
      */
     boolean hasBeenModified = false;
+
+    /**
+     * Active instability countdown, -1 if not active.
+     */
+    private int unstableTicks = -1;
+
+    /**
+     * Snapshot of {@link BaseSpawner#nextSpawnData} taken at instability start so detonation always references
+     * the mob the spawner was about to produce, even if a tick mutates the field. Persisted under
+     * {@code captured_spawn_data} so a chunk unload mid-countdown still detonates the correct mob on reload.
+     */
+    @Nullable
+    private SpawnData capturedSpawnData;
 
     public ApothSpawnerTile(BlockPos pos, BlockState state) {
         super(pos, state);
@@ -72,6 +98,14 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
         });
         tag.put("stats", stats);
         tag.putBoolean("modified", this.hasBeenModified);
+        if (this.unstableTicks > -1) {
+            tag.putInt("unstable_ticks", this.unstableTicks);
+        }
+        if (this.capturedSpawnData != null) {
+            SpawnData.CODEC.encodeStart(NbtOps.INSTANCE, this.capturedSpawnData)
+                .resultOrPartial(msg -> ApothicSpawners.LOGGER.warn("Failed to save captured_spawn_data: {}", msg))
+                .ifPresent(encoded -> tag.put("captured_spawn_data", encoded));
+        }
         super.saveAdditional(tag, registries);
     }
 
@@ -95,6 +129,12 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
         if (tag.contains("modified")) {
             this.hasBeenModified = tag.getBoolean("modified");
         }
+        this.unstableTicks = tag.contains("unstable_ticks") ? tag.getInt("unstable_ticks") : -1;
+        this.capturedSpawnData = tag.contains("captured_spawn_data")
+            ? SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.get("captured_spawn_data"))
+                .resultOrPartial(msg -> ApothicSpawners.LOGGER.warn("Invalid captured_spawn_data: {}", msg))
+                .orElse(null)
+            : null;
         super.loadAdditional(tag, registries);
     }
 
@@ -104,6 +144,78 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
 
     public boolean hasBeenModified() {
         return this.hasBeenModified;
+    }
+
+    public boolean isUnstable() {
+        return this.unstableTicks >= 0;
+    }
+
+    /**
+     * Starts the instability process. At the end of the process, the spawner will explode, spawn a cluster of enemies, and spawn a loot table.
+     */
+    public void beginInstability() {
+        if (this.isUnstable()) return;
+        this.capturedSpawnData = this.spawner.nextSpawnData;
+        if (this.capturedSpawnData == null && this.level != null) {
+            this.capturedSpawnData = this.spawner.spawnPotentials.getRandomValue(this.level.getRandom()).orElse(null);
+        }
+        this.unstableTicks = INSTABILITY_DURATION_TICKS;
+        this.setChanged();
+        if (this.level != null && !this.level.isClientSide) {
+            BlockState state = this.level.getBlockState(this.getBlockPos());
+            this.level.sendBlockUpdated(this.getBlockPos(), state, state, 3);
+        }
+    }
+
+    private void detonateUnstable(ServerLevel level, BlockPos pos) {
+        SpawnData data = this.capturedSpawnData != null ? this.capturedSpawnData : this.spawner.nextSpawnData;
+        RandomSource rand = level.getRandom();
+
+        level.removeBlock(pos, false);
+        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, INSTABILITY_RADIUS, Level.ExplosionInteraction.BLOCK);
+
+        if (data != null) {
+            CompoundTag entityTag = data.getEntityToSpawn();
+            EntityType<?> type = EntityType.by(entityTag).orElse(null);
+            if (type != null) {
+                for (int i = 0; i < UNSTABLE_MOB_COUNT; i++) {
+                    double x = pos.getX() + 0.5 + (rand.nextDouble() - rand.nextDouble()) * 1.5;
+                    double y = pos.getY() + (rand.nextDouble() - 0.5);
+                    double z = pos.getZ() + 0.5 + (rand.nextDouble() - rand.nextDouble()) * 1.5;
+                    Entity entity = EntityType.loadEntityRecursive(entityTag, level, fresh -> {
+                        fresh.moveTo(x, y, z, rand.nextFloat() * 360.0F, 0.0F);
+                        return fresh;
+                    });
+                    if (entity != null) {
+                        level.tryAddFreshEntityWithPassengers(entity);
+                        if (entity instanceof Mob mob) {
+                            mob.spawnAnim();
+                        }
+                    }
+                }
+            }
+        }
+
+        LootTable table = level.getServer().reloadableRegistries().getLootTable(ASObjects.UNSTABLE_SPAWNER_LOOT);
+        if (table != LootTable.EMPTY) {
+            LootParams params = new LootParams.Builder(level)
+                .withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(pos))
+                .create(LootContextParamSets.CHEST);
+            table.getRandomItems(params, rand.nextLong(), stack -> spawnUnstableLoot(level, pos, stack, rand));
+        }
+    }
+
+    private static void spawnUnstableLoot(ServerLevel level, BlockPos pos, ItemStack stack, RandomSource rand) {
+        if (stack.isEmpty()) return;
+        double x = pos.getX() + 0.5 + (rand.nextDouble() - rand.nextDouble()) * LOOT_SCATTER_RADIUS;
+        double y = pos.getY() + 0.5 + rand.nextDouble() * 0.5;
+        double z = pos.getZ() + 0.5 + (rand.nextDouble() - rand.nextDouble()) * LOOT_SCATTER_RADIUS;
+        ItemEntity item = new ItemEntity(level, x, y, z, stack);
+        item.setDeltaMovement(
+            (rand.nextDouble() - 0.5) * 0.4,
+            0.2 + rand.nextDouble() * 0.3,
+            (rand.nextDouble() - 0.5) * 0.4);
+        level.addFreshEntity(item);
     }
 
     public class SpawnerLogicExt extends BaseSpawner {
@@ -157,6 +269,20 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
 
         @Override
         public void clientTick(Level pLevel, BlockPos pPos) {
+            if (ApothSpawnerTile.this.unstableTicks >= 0) {
+                RandomSource rand = pLevel.random;
+                for (int i = 0; i < 8; i++) {
+                    double x = pPos.getX() + 0.5 + (rand.nextDouble() - rand.nextDouble()) * 2.5;
+                    double y = pPos.getY() + rand.nextDouble();
+                    double z = pPos.getZ() + 0.5 + (rand.nextDouble() - rand.nextDouble()) * 2.5;
+                    double xd = rand.nextGaussian();
+                    double yd = rand.nextFloat() * 0.01F;
+                    double zd = rand.nextGaussian();
+                    pLevel.addParticle(ParticleTypes.FLAME, x, y, z, xd, yd, zd);
+                    pLevel.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, xd, yd, zd);
+                }
+                return;
+            }
             if (!this.isActivated(pLevel, pPos)) {
                 this.oSpin = this.spin;
             }
@@ -179,6 +305,13 @@ public class ApothSpawnerTile extends SpawnerBlockEntity {
         @Override
         @SuppressWarnings("deprecation")
         public void serverTick(ServerLevel level, BlockPos pPos) {
+            if (ApothSpawnerTile.this.isUnstable()) {
+                if (ApothSpawnerTile.this.unstableTicks-- == 0) {
+                    ApothSpawnerTile.this.detonateUnstable(level, pPos);
+                }
+                return;
+            }
+
             if (this.isActivated(level, pPos)) {
                 if (this.spawnDelay == -1) {
                     this.delay(level, pPos);
