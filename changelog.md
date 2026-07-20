@@ -1,3 +1,8 @@
+## 1.4.0
+* Backported the following changes from 2.0.0 (Minecraft 26.1.2)
+  * Mob Spawners that are hit with an explosion will cause a cascade explosion.
+  * Fixed float comparisons in percentage-based spawner stats.
+
 ## 1.3.4
 * Updated the Entity Despawn Delay feature to only apply to spawner-spawned mobs.
   * Prior to this change, a side effect of entities staying around for too long could appear as very low natural spawn rates.
