@@ -1,6 +1,6 @@
 {
     "type": "apothic_spawners:spawner_modifier",
-    "mainhand": "minecraft:turtle_egg",
+    "mainhand": "minecraft:golden_dandelion",
     "offhand": "minecraft:quartz",
     "stat_changes": [
         {

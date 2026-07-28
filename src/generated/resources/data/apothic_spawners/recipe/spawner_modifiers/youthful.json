@@ -1,6 +1,6 @@
 {
     "type": "apothic_spawners:spawner_modifier",
-    "mainhand": "minecraft:turtle_egg",
+    "mainhand": "minecraft:golden_dandelion",
     "stat_changes": [
         {
             "type": "apothic_spawners:youthful",

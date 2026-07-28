@@ -49,7 +49,7 @@ public class ASRecipeProvider extends LegacyRecipeProvider {
         addModifier("spawner_modifiers/ignore_light", Items.SOUL_LANTERN, boolSet(SpawnerStats.IGNORE_LIGHT, true));
         addModifier("spawner_modifiers/no_ai", Items.CHORUS_FRUIT, boolSet(SpawnerStats.NO_AI, true));
         addModifier("spawner_modifiers/silent", ItemTags.WOOL, boolSet(SpawnerStats.SILENT, true));
-        addModifier("spawner_modifiers/youthful", Items.TURTLE_EGG, boolSet(SpawnerStats.YOUTHFUL, true));
+        addModifier("spawner_modifiers/youthful", Items.GOLDEN_DANDELION, boolSet(SpawnerStats.YOUTHFUL, true));
         addModifier("spawner_modifiers/burning", Items.CAMPFIRE, boolSet(SpawnerStats.BURNING, true));
         addModifier("spawner_modifiers/echoing", Items.ECHO_SHARD, intChange(SpawnerStats.ECHOING, 1, null, 3));
 
@@ -67,7 +67,7 @@ public class ASRecipeProvider extends LegacyRecipeProvider {
         addInverse("spawner_modifiers/_inverse/ignore_light", Items.SOUL_LANTERN, boolSet(SpawnerStats.IGNORE_LIGHT, false));
         addInverse("spawner_modifiers/_inverse/no_ai", Items.CHORUS_FRUIT, boolSet(SpawnerStats.NO_AI, false));
         addInverse("spawner_modifiers/_inverse/silent", ItemTags.WOOL, boolSet(SpawnerStats.SILENT, false));
-        addInverse("spawner_modifiers/_inverse/youthful", Items.TURTLE_EGG, boolSet(SpawnerStats.YOUTHFUL, false));
+        addInverse("spawner_modifiers/_inverse/youthful", Items.GOLDEN_DANDELION, boolSet(SpawnerStats.YOUTHFUL, false));
         addInverse("spawner_modifiers/_inverse/burning", Items.CAMPFIRE, boolSet(SpawnerStats.BURNING, false));
         addInverse("spawner_modifiers/_inverse/echoing", Items.ECHO_SHARD, intChange(SpawnerStats.ECHOING, -1, 0, null));
     }
