@@ -1,3 +1,11 @@
+## 2.0.1
+* Fixed a crash with Neoforge 26.1.2.84+
+* Updated the default Youthful modifier to use Golden Dandelions
+* Tenwoc: Updated Ukranian translation.
+* PODOB: Added Korean translation.
+* PrincessStellar: Updated Brazilian translation.
+* Quarkrus: Updated Russian translation.
+
 ## 2.0.0
 * Ported to Minecraft 26.1.2.
 * Mob Spawners that are hit with an explosion will cause a cascade explosion.
