@@ -1,0 +1,114 @@
+{
+    "item.apothic_spawners.spawner": "%s 생성기",
+
+    "enchantment.apothic_spawners.capturing": "포획",
+    "enchantment.apothic_spawners.capturing.desc": "몹들이 자신의 생성 알을 드랍할 확률이 생깁니다.",
+
+    "misc.apothic_spawners.concat": "%s %s",
+    "misc.apothic_spawners.value_concat": "%s: %s",
+    "misc.apothic_spawners.min_value": "최소 값: %s",
+    "misc.apothic_spawners.max_value": "최대 값: %s",
+    "misc.apothic_spawners.mainhand": "주로 사용하는 손으로 들기",
+    "misc.apothic_spawners.offhand": "손에 들고 있지 않을 때",
+    "misc.apothic_spawners.not_consumed": "이 아이템은 소모되지 않습니다",
+    "misc.apothic_spawners.rclick_spawner": "생성기에 우클릭",
+    "misc.apothic_spawners.entity": "엔티티",
+    "misc.apothic_spawners.shift_stats": "Shift를 눌러 스탯 보기",
+    "misc.apothic_spawners.ctrl_stats": "Ctrl을 눌러 스탯 보기",
+    "misc.apothic_spawners.banned": "생성기에 사용할 수 없음",
+    "misc.apothic_spawners.on": "%s: 켜짐",
+    "misc.apothic_spawners.off": "%s: 꺼짐",
+
+    "stat.apothic_spawners.min_delay": "최소 생성 지연",
+    "stat.apothic_spawners.min_delay.desc": "생성 사이의 최소 주기(틱)",
+
+    "stat.apothic_spawners.max_delay": "최대 생성 지연",
+    "stat.apothic_spawners.max_delay.desc": "생성 사이의 최대 주기(틱)",
+
+    "stat.apothic_spawners.spawn_count": "생성 수량",
+    "stat.apothic_spawners.spawn_count.desc": "한번에 생성되는 개체의 수",
+
+    "stat.apothic_spawners.max_nearby_entities": "최대 개체",
+    "stat.apothic_spawners.max_nearby_entities.desc": "주변에 존재할 수 있는 개체 수의 최대치",
+
+    "stat.apothic_spawners.req_player_range": "작동 반경",
+    "stat.apothic_spawners.req_player_range.desc": "플레이어로 부터 떨어졌을 때 생성이 멈추는 거리",
+
+    "stat.apothic_spawners.spawn_range": "생성 반경",
+    "stat.apothic_spawners.spawn_range.desc": "몹이 생성될 수 있는 반경(블록)",
+
+    "stat.apothic_spawners.ignore_players": "플레이어 무시",
+    "stat.apothic_spawners.ignore_players.desc": "생성기가 주변에 플레이어를 필요로 하지 않음",
+
+    "stat.apothic_spawners.ignore_conditions": "조건 무시",
+    "stat.apothic_spawners.ignore_conditions.desc": "생성기가 생성 조건을 무시",
+
+    "stat.apothic_spawners.redstone_control": "레드스톤 제어",
+    "stat.apothic_spawners.redstone_control.desc": "생성기가 작동하기 위해 레드스톤 필요",
+
+    "stat.apothic_spawners.ignore_light": "빛 무시",
+    "stat.apothic_spawners.ignore_light.desc": "생성기가 빛 수준을 무시함",
+
+    "stat.apothic_spawners.no_ai": "AI 없음",
+    "stat.apothic_spawners.no_ai.desc": "AI 없이 개체 생성",
+
+    "stat.apothic_spawners.silent": "침묵",
+    "stat.apothic_spawners.silent.desc": "생성된 개체가 소리를 내지 않음",
+
+    "stat.apothic_spawners.youthful": "청년",
+    "stat.apothic_spawners.youthful.desc": "생성기가 가능하면 항상 아기 개체를 소환함",
+
+    "stat.apothic_spawners.initial_health": "초기 체력",
+    "stat.apothic_spawners.initial_health.desc": "생성된 몹들의 초기 체력 비율",
+
+    "stat.apothic_spawners.burning": "타오름",
+    "stat.apothic_spawners.burning.desc": "몹이 불타는 상태로 생성",
+
+    "stat.apothic_spawners.echoing": "메아리",
+    "stat.apothic_spawners.echoing.desc": "생성된 몹이 레벨에 따라 증가하는 추가 전리품을 떨어트림",
+
+    "title.apothic_spawners.spawner": "생성기 수정",
+    "info.apothic_spawners.spawner": "생성기는 다양한 아이템으로 수정할 수 있으며, %s으로 획득할 수 있습니다.",
+    "info.apothic_spawners.spawner.no_silk": "생성기는 다양한 아이템으로 수정할 수 있으나, 현재 섬세한 손길을 통한 수집은 비활성화 되어 있습니다.",
+    "info.apothic_spawners.spawner.always_drop": "생성기는 다양한 아이템으로 수정할 수 있으며, 파괴시 항상 드랍됩니다.",
+    "info.apothic_spawners.capturing": "포획 마법부여는 몬스터에게 생성 알을 떨어트릴 확률을 부여합니다.\\n \\n드롭 확률: 레벨당 %s%%",
+
+    "config.jade.plugin_apothic_spawners.spawner": "어포틱 스포너",
+
+    "advancements.apothic_spawners.spawner.root": "어포틱 스포너의 스포너",
+    "advancements.apothic_spawners.spawner.root.desc": "생성기를 획득하고 수정할 수 있습니다. JEI로 설명을 확인해보세요.",
+    "advancements.apothic_spawners.spawner": "어포틱 스포너",
+    "advancements.apothic_spawners.spawner.desc": "섬세한 손길로 몹 생성기를 획득하세요",
+    "advancements.apothic_spawners.capturing": "잡았다!",
+    "advancements.apothic_spawners.capturing.desc": "포획 마법부여를 통해 몹에게서 생성 알을 획득하세요.",
+    "advancements.apothic_spawners.modifier": "몇개만 좀 고치고...",
+    "advancements.apothic_spawners.modifier.desc": "생성기 변경자를 통해 생성기 능력치를 변경하세요.",
+    "advancements.apothic_spawners.spawncount": "저 녀석 생성기 사이즈 좀 봐!",
+    "advancements.apothic_spawners.spawncount.desc": "생성기의 생성 수량을 16으로 늘리세요.",
+    "advancements.apothic_spawners.maxdelay": "시간-왜곡의 생성기",
+    "advancements.apothic_spawners.maxdelay.desc": "생성기의 최대 생성 주기를 20으로 낮추세요.",
+    "advancements.apothic_spawners.mindelay": "난 빨라",
+    "advancements.apothic_spawners.mindelay.desc": "생성기의 최소 생성 지연시간을 20으로 낮추세요.",
+    "advancements.apothic_spawners.nearbyents": "군단 만들기",
+    "advancements.apothic_spawners.nearbyents.desc": "생성기의 최대 개체를 32로 늘리세요.",
+    "advancements.apothic_spawners.playerrange": "싸우기엔 멀다",
+    "advancements.apothic_spawners.playerrange.desc": "생성기의 작동 반경을 48로 늘리세요.",
+    "advancements.apothic_spawners.spawnrange": "마일당 몹",
+    "advancements.apothic_spawners.spawnrange.desc": "생성기의 생성 반경을 32로 늘리세요.",
+    "advancements.apothic_spawners.conditions": "확인되지 않은 생성",
+    "advancements.apothic_spawners.conditions.desc": "생성기의 생성 조건을 비활성화 하세요",
+    "advancements.apothic_spawners.players": "공정-준비",
+    "advancements.apothic_spawners.players.desc": "생성기 주변에 플레이어가 필요 없도록 설정하세요.",
+    "advancements.apothic_spawners.redstone": "스위치 추가",
+    "advancements.apothic_spawners.redstone.desc": "생성기의 레드스톤 제어 기능을 활성화합니다.",
+    "advancements.apothic_spawners.light": "누가 어둠이 필요해?",
+    "advancements.apothic_spawners.light.desc": "조명 조건에 상관없이 생성기가 작동하도록 만드세요.",
+    "advancements.apothic_spawners.noai": "두뇌 흡수",
+    "advancements.apothic_spawners.noai.desc": "생성기의 몹 AI를 비활성화하세요.",
+    "advancements.apothic_spawners.ultimate_spawner": "궁극의 생성기",
+    "advancements.apothic_spawners.ultimate_spawner.desc": "레드스톤 제어 방식이며, AI가 없고, 소환 조건과 플레이어를 무시하는, 지연 시간이 최소화된 몬스터 생성기를 만드세요.",
+
+    "enchantment.level.0": "0",
+
+    "emi.category.apothic_spawners.spawner": "Spawner Modification"
+}
