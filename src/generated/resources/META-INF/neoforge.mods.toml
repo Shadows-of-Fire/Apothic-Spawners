@@ -29,7 +29,7 @@ config="apothic_spawners.mixins.json"
 [[dependencies.apothic_spawners]]
     modId="neoforge"
     type="required"
-    versionRange="[26.1.2.64-beta,)"
+    versionRange="[26.1.2.84,)"
     ordering="NONE"
     side="BOTH"
 

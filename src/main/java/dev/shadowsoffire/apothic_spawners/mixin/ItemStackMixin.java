@@ -16,11 +16,11 @@ import net.minecraft.world.item.ItemStack;
  * calling {@code Spawner.appendHoverText}. We wrap that {@code is()} call to return false
  * when the item is an {@link ApothSpawnerItem}, so the vanilla tooltip block is skipped entirely.
  */
-@Mixin(ItemStack.class)
+@Mixin(value = ItemStack.class, targets = "net.neoforged.neoforge.common.tooltip.VanillaDataComponentTooltips")
 public class ItemStackMixin {
 
     @WrapOperation(
-        method = {"addDetailsToTooltip", "getTooltipLines"},
+        method = {"addDetailsToTooltip", "getTooltipLines", "addDetailsToTooltipComponents", "lambda$collectVanillaAppenders$1"},
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/item/ItemStack;is(Ljava/lang/Object;)Z",
@@ -28,7 +28,7 @@ public class ItemStackMixin {
             remap = false),
         remap = false,
         require = 1)
-    private boolean apoth_skipVanillaSpawnerTooltip(ItemStack self, Object predicate, Operation<Boolean> original) {
+    private static boolean apoth_skipVanillaSpawnerTooltip(ItemStack self, Object predicate, Operation<Boolean> original) {
         if (self.getItem() instanceof ApothSpawnerItem) {
             return false;
         }
