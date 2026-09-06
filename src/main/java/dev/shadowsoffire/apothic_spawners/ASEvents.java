@@ -91,31 +91,31 @@ public class ASEvents {
         }
     }
 
-    @SubscribeEvent
-    @SuppressWarnings("deprecation")
-    public void handleUseItem(RightClickBlock e) {
-        if (e.getLevel().getBlockEntity(e.getPos()) instanceof ApothSpawnerTile) {
-            ItemStack s = e.getItemStack();
-            if (s.getItem() instanceof SpawnEggItem) {
-                EntityType<?> type = SpawnEggItem.getType(s);
-                if (type.builtInRegistryHolder().is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
-                    e.setCanceled(true);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    @SuppressWarnings("deprecation")
-    public void handleTooltips(ItemTooltipEvent e) {
+@SubscribeEvent
+@SuppressWarnings("deprecation")
+public void handleUseItem(RightClickBlock e) {
+    if (e.getLevel().getBlockEntity(e.getPos()) instanceof ApothSpawnerTile) {
         ItemStack s = e.getItemStack();
         if (s.getItem() instanceof SpawnEggItem) {
             EntityType<?> type = SpawnEggItem.getType(s);
-            if (type.builtInRegistryHolder().is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
-                e.getToolTip().add(ApothicSpawners.lang("misc", "banned").withStyle(ChatFormatting.GRAY));
+            if (type != null && type.builtInRegistryHolder().is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
+                e.setCanceled(true);
             }
         }
     }
+}
+
+@SubscribeEvent
+@SuppressWarnings("deprecation")
+public void handleTooltips(ItemTooltipEvent e) {
+    ItemStack s = e.getItemStack();
+    if (s.getItem() instanceof SpawnEggItem) {
+        EntityType<?> type = SpawnEggItem.getType(s);
+        if (type != null && type.builtInRegistryHolder().is(ASObjects.BLACKLISTED_FROM_SPAWNERS)) {
+            e.getToolTip().add(ApothicSpawners.lang("misc", "banned").withStyle(ChatFormatting.GRAY));
+        }
+    }
+}
 
     @SubscribeEvent
     public void tickDumbMobs(EntityTickEvent.Pre e) {
